@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GerenciaAgro.Views.Controls.RegistroControle"
+             Title="RegistroControle"
+             BackgroundColor="White">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Logo e título -->
+            <Image Source="logo.jpeg" HorizontalOptions="Center" HeightRequest="100"/>
+            <Label Text="CADASTRO" FontSize="24" FontAttributes="Bold" TextColor="Green" HorizontalOptions="Center" />
+
+            <!-- Campos ComboBox -->
+            <Label Text="CULTIVO" FontAttributes="Bold" />
+            <Picker x:Name="CultivoPicker" Title="Selecione o Cultivo" />
+
+            <Label Text="PRAGA" FontAttributes="Bold" />
+            <Picker x:Name="PragaPicker" Title="Selecione a Praga" />
+
+            <Label Text="AGROTÓXICO" FontAttributes="Bold" />
+            <Picker x:Name="AgrotoxicoPicker" Title="Selecione o Agrotóxico" />
+
+            <Label Text="OBSERVAÇÃO" FontAttributes="Bold" />
+            <Entry x:Name="ObservacaoEntry" Placeholder="Digite uma observação" />
+
+            <Label Text="DATA" FontAttributes="Bold" />
+            <DatePicker x:Name="DataPicker" />
+
+            <!-- Botão Registrar -->
+            <Button Text="REGISTRAR" 
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    Clicked="OnRegistrarClicked"
+                    CornerRadius="10" />
+
+            <!-- Rodapé com botões -->
+            <Grid ColumnDefinitions="*,*" HeightRequest="70" BackgroundColor="Green">
+                <ImageButton Source="escrever.png" BackgroundColor="Transparent"
+                             Clicked="OnRegistrarClicked" />
+                <ImageButton Source="livro.png" Grid.Column="1" BackgroundColor="Transparent"
+                             Clicked="OnVerItensClicked" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
