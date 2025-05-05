@@ -45,7 +45,7 @@
 
             <!-- Rodapé com botões -->
             <Grid ColumnDefinitions="*,*" HeightRequest="70" BackgroundColor="Green">
-                <ImageButton Source="escrever.png" BackgroundColor="Transparent"
+                <ImageButton Source="anotacao.png" BackgroundColor="Transparent"
                              Clicked="OnRegistrarClicked" />
                 <ImageButton Source="livro.png" Grid.Column="1" BackgroundColor="Transparent"
                              Clicked="OnVerItensClicked" />

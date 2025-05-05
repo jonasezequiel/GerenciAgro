@@ -1,6 +1,7 @@
 ﻿using CasosDeUso;
 using CasosDeUso.Interface;
 using CasosDeUso.PluginsInterfaces;
+using GerenciaAgro.Views;
 using Microsoft.Extensions.Logging;
 
 namespace GerenciaAgro
@@ -30,7 +31,7 @@ namespace GerenciaAgro
             builder.Services.AddSingleton<IAdicionarAplicacaoUseCase, AdicionarAplicacaoUseCase>();
             builder.Services.AddSingleton<IEditarAplicacaoUseCase, EditarAplicacaoUseCase>();
             #endregion
-            //builder.Services.AddSingleton<AplicacaoPa>();
+            builder.Services.AddSingleton<AplicacaoPagina>();
             //builder.Services.AddSingleton<EditarContatoPage>();
             //builder.Services.AddSingleton<AdicionarContatoPage>();
 

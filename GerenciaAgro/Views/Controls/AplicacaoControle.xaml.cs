@@ -1,10 +1,15 @@
 namespace GerenciaAgro.Views.Controls;
 
+using CasosDeUso.Interface;
+using CoreBusiness.Entidades;
+using Microsoft.Maui.Controls;
+using System.Collections.ObjectModel;
+
 public partial class AplicacaoControle : ContentPage
 {
 	public AplicacaoControle()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         // Exemplos de dados — você pode carregar de banco ou API
         CultivoPicker.ItemsSource = new List<string> { "Milho", "Soja", "Trigo" };
@@ -27,6 +32,6 @@ public partial class AplicacaoControle : ContentPage
 
     private async void OnVerItensClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new AdicionarRegistro());  // Página que lista os cadastros
+        await Shell.Current.GoToAsync($"{nameof(AplicacaoPagina)}");
     }
 }

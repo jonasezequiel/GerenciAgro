@@ -1,8 +1,8 @@
 namespace GerenciaAgro.Views;
 
-public partial class AdicionarRegistro : ContentPage
+public partial class AdicionarAplicacao : ContentPage
 {
-	public AdicionarRegistro()
+	public AdicionarAplicacao()
 	{
 		InitializeComponent();
 	}
