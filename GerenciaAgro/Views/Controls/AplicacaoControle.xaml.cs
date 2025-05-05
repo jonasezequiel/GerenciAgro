@@ -1,8 +1,8 @@
 namespace GerenciaAgro.Views.Controls;
 
-public partial class RegistroControle : ContentPage
+public partial class AplicacaoControle : ContentPage
 {
-	public RegistroControle()
+	public AplicacaoControle()
 	{
 		InitializeComponent();
 
@@ -23,8 +23,8 @@ public partial class RegistroControle : ContentPage
         DisplayAlert("Registro", $"Cultivo: {cultivo}\nPraga: {praga}\nAgrotóxico: {agrotoxico}\nObs: {observacao}\nData: {data}", "OK");
     }
 
-    //private async void OnVerItensClicked(object sender, EventArgs e)
-    //{
-    //    await Navigation.PushAsync(new AplicacaoPagina());  // Página que lista os cadastros
-    //}
+    private async void OnVerItensClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new AdicionarRegistro());  // Página que lista os cadastros
+    }
 }

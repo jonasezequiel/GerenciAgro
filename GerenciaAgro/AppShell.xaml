@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="GerenciaAgro.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:GerenciaAgro"
-    Shell.FlyoutBehavior="Disabled"
-    Title="GerenciaAgro">
+<Shell  
+   x:Class="GerenciaAgro.AppShell"  
+   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+   xmlns:local="clr-namespace:GerenciaAgro"  
+   xmlns:views="clr-namespace:GerenciaAgro.Views.Controls"  
+   Shell.FlyoutBehavior="Disabled"  
+   Title="GerenciAgro">  
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:AplicacaoControle}"
-        Route="MainPage" />
+   <ShellContent  
+       Title="Home"  
+       ContentTemplate="{DataTemplate views:AplicacaoControle}"  
+       Route="AplicacaoControle" />  
 
 </Shell>

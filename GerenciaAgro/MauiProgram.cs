@@ -1,10 +1,7 @@
 ﻿using CasosDeUso;
 using CasosDeUso.Interface;
 using CasosDeUso.PluginsInterfaces;
-using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
-using MinhaAgenda.Plugins.SqlLite;
-using MinhaAgenda.Views;
 
 namespace GerenciaAgro
 {
@@ -23,19 +20,19 @@ namespace GerenciaAgro
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
             #region injeção de dependências
             //builder.Services.AddSingleton<IRepositorioDeContatos, RepositorioContatosSqlLite>();
-            builder.Services.AddSingleton<IRepositorioDeAplicacao, Plugins.DadosEmMemoria.Dados>();
-            builder.Services.AddSingleton<IVisualizarContatosUseCase, VisualizarContatosUseCase>();
-            builder.Services.AddSingleton<IApagarContatoUseCase, ApagarContatosUseCase>();
-            builder.Services.AddSingleton<IAdicionarContatoUseCase, AdicionarContatoUseCase>();
-            builder.Services.AddSingleton<IEditarContatoUseCase, EditarContatoUseCase>();
+            builder.Services.AddSingleton<IRepositorioDeAplicacao, DadosEmMemoria.Dados>();
+            builder.Services.AddSingleton<IVisualizarAplicacaoUseCase, VisualizarAplicacaoUseCase>();
+            builder.Services.AddSingleton<IApagarAplicacaoUseCase, ApagarAplicacaoUseCase>();
+            builder.Services.AddSingleton<IAdicionarAplicacaoUseCase, AdicionarAplicacaoUseCase>();
+            builder.Services.AddSingleton<IEditarAplicacaoUseCase, EditarAplicacaoUseCase>();
             #endregion
-            builder.Services.AddSingleton<ContatosPage>();
-            builder.Services.AddSingleton<EditarContatoPage>();
-            builder.Services.AddSingleton<AdicionarContatoPage>();
+            //builder.Services.AddSingleton<AplicacaoPa>();
+            //builder.Services.AddSingleton<EditarContatoPage>();
+            //builder.Services.AddSingleton<AdicionarContatoPage>();
 
             return builder.Build();
         }
