@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GerenciaAgro.Views.Controls.AplicacaoControle"
@@ -12,20 +11,30 @@
             <Label Text="CADASTRO" FontSize="24" FontAttributes="Bold" TextColor="Green" HorizontalOptions="Center" />
 
             <!-- Campos ComboBox -->
-            <Label Text="CULTIVO" FontAttributes="Bold" />
-            <Picker x:Name="CultivoPicker" Title="Selecione o Cultivo" />
+            <Label Text="CULTIVO" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                <Picker x:Name="CultivoPicker" TextColor="Black" BackgroundColor="White" />
+            </Frame>
 
-            <Label Text="PRAGA" FontAttributes="Bold" />
-            <Picker x:Name="PragaPicker" Title="Selecione a Praga" />
+            <Label Text="PRAGA" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
+                <Picker x:Name="PragaPicker" TextColor="Black" BackgroundColor="White" />
+            </Frame>
 
-            <Label Text="AGROTÓXICO" FontAttributes="Bold" />
-            <Picker x:Name="AgrotoxicoPicker" Title="Selecione o Agrotóxico" />
+            <Label Text="AGROTÓXICO" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Gray" CornerRadius="1" Padding="0">
+                <Picker x:Name="AgrotoxicoPicker" TextColor="Black" BackgroundColor="White" />
+            </Frame>
 
-            <Label Text="OBSERVAÇÃO" FontAttributes="Bold" />
-            <Entry x:Name="ObservacaoEntry" Placeholder="Digite uma observação" />
+            <Label Text="OBSERVAÇÃO" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Gray" CornerRadius="1" Padding="0">
+                <Entry x:Name="ObservacaoEntry" TextColor="Black" BackgroundColor="White" />
+            </Frame>
 
-            <Label Text="DATA" FontAttributes="Bold" />
-            <DatePicker x:Name="DataPicker" />
+            <Label Text="DATA" FontAttributes="Bold" TextColor="Black"/>
+            <Frame x:Name="DatePickerFrame" BorderColor="Gray" CornerRadius="1" Padding="0">
+                <DatePicker x:Name="DataPicker" TextColor="Black" BackgroundColor="White" />
+            </Frame>
 
             <!-- Botão Registrar -->
             <Button Text="REGISTRAR" 
