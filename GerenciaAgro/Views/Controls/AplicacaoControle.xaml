@@ -30,7 +30,7 @@
             <!-- Botão Registrar -->
             <Button Text="REGISTRAR" 
                     BackgroundColor="Green"
-                    TextColor="White"
+                    TextColor="Black"
                     Clicked="OnRegistrarClicked"
                     CornerRadius="10" />
 
