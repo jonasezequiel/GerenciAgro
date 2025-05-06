@@ -1,13 +1,9 @@
 namespace GerenciaAgro.Views.Controls;
-
-using CasosDeUso.Interface;
-using CoreBusiness.Entidades;
 using Microsoft.Maui.Controls;
-using System.Collections.ObjectModel;
 
 public partial class AplicacaoControle : ContentPage
 {
-	public AplicacaoControle()
+    public AplicacaoControle()
     {
         InitializeComponent();
 

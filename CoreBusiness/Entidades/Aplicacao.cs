@@ -1,13 +1,23 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using SQLite;
+using System.ComponentModel.DataAnnotations;
 
 namespace CoreBusiness.Entidades;
 
 public class Aplicacao
 {
+    [Required]
+    [PrimaryKey, AutoIncrement]
     public Guid Id { get; set; }
-    public required Agrotoxico Agrotoxico { get; set; }
-    public required Cultivo Cultivo { get; set; }
+    [Required]
+    public Agrotoxico Agrotoxico { get; set; }
+    [Required]
+    public Cultivo Cultivo { get; set; }
     public DateTimeOffset DataAplicacao { get; set; }
-    public required IEnumerable<Praga> PragasAlvos { get; set; }
+    [Required]
+    public IEnumerable<Praga> PragasAlvos { get; set; }
     public string? Observacao { get; set; }
+
+    public Aplicacao()
+    {
+    }
 }

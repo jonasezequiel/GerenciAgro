@@ -6,6 +6,9 @@ namespace DadosEmMemoria;
 public class Dados : IRepositorioDeAplicacao
 {
     public static List<Aplicacao> _aplicacoes;
+    public static List<Praga> _pragas;
+    public static List<Cultivo> _cultivos;
+    public static List<Agrotoxico> _agrotoxico;
 
     public Dados()
     {
@@ -94,6 +97,78 @@ public class Dados : IRepositorioDeAplicacao
                     }
                 },
                 Observacao = "Aplicar a cada 15 dias"
+            }
+        };
+
+        _pragas = new List<Praga>()
+        {
+            new Praga()
+            {
+                Id = Guid.NewGuid(),
+                Nome = "Lagarta"
+            },
+            new Praga()
+            {
+                Id = Guid.NewGuid(),
+                Nome = "Pulgão"
+            },
+            new Praga()
+            {
+                Id = Guid.NewGuid(),
+                Nome = "Broca"
+            }
+        };
+
+        _cultivos = new List<Cultivo>()
+        {
+            new Cultivo()
+            {
+                Id = Guid.NewGuid(),
+                Nome = "Milho"
+            },
+            new Cultivo()
+            {
+                Id = Guid.NewGuid(),
+                Nome = "Soja"
+            },
+            new Cultivo()
+            {
+                Id = Guid.NewGuid(),
+                Nome = "Trigo"
+            }
+        };
+
+        _agrotoxico = new List<Agrotoxico>
+        {
+            new Agrotoxico()
+            {
+                Id = Guid.NewGuid(),
+                Nome = "Inseticida X",
+                Lote = "Lote 123",
+                Validade = DateTimeOffset.Now.AddMonths(6),
+                PragaAlvo = new List<Praga>()
+                {
+                    new Praga()
+                    {
+                        Id = Guid.NewGuid(),
+                        Nome = "Lagarta"
+                    }
+                }
+            },
+            new Agrotoxico()
+            {
+                Id = Guid.NewGuid(),
+                Nome = "Herbicida Y",
+                Lote = "Lote 456",
+                Validade = DateTimeOffset.Now.AddMonths(12),
+                PragaAlvo = new List<Praga>()
+                {
+                    new Praga()
+                    {
+                        Id = Guid.NewGuid(),
+                        Nome = "Pulgão"
+                    }
+                }
             }
         };
     }
