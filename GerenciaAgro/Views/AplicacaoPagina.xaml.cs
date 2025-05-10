@@ -59,8 +59,8 @@ public partial class AplicacaoPagina : ContentPage
     {
         try
         {
-            // Cria um novo documento PDF
-            var pdfDocument = new PdfDocument();
+            //Cria um novo documento PDF
+           var pdfDocument = new PdfDocument();
             var pdfPage = pdfDocument.AddPage();
             var graphics = XGraphics.FromPdfPage(pdfPage);
             var font = new XFont("Arial", 12, XFontStyle.Regular);
@@ -71,8 +71,9 @@ public partial class AplicacaoPagina : ContentPage
             double xStart = 20; // Posição inicial no eixo X
             double yPosition = 20; // Posição inicial no eixo Y
 
-            // Adiciona o cabeçalho do relatório
-            graphics.DrawString("Relatório de Aplicações", new XFont("Arial", 16, XFontStyle.Bold), XBrushes.Black, new XPoint(xStart, yPosition));
+            //Adiciona o cabeçalho do relatório
+
+           graphics.DrawString("Relatório de Aplicações", new XFont("Arial", 16, XFontStyle.Bold), XBrushes.Black, new XPoint(xStart, yPosition));
             yPosition += 30;
 
             // Desenha o cabeçalho da tabela

@@ -2,6 +2,7 @@
 using CasosDeUso.Interface;
 using CasosDeUso.PluginsInterfaces;
 using GerenciaAgro.Views;
+using GerenciaAgro.Views.Controls;
 using Microsoft.Extensions.Logging;
 
 namespace GerenciaAgro
@@ -30,6 +31,7 @@ namespace GerenciaAgro
             builder.Services.AddSingleton<IApagarAplicacaoUseCase, ApagarAplicacaoUseCase>();
             builder.Services.AddSingleton<IAdicionarAplicacaoUseCase, AdicionarAplicacaoUseCase>();
             builder.Services.AddSingleton<IEditarAplicacaoUseCase, EditarAplicacaoUseCase>();
+            builder.Services.AddTransient<AplicacaoControle>();
             #endregion
             builder.Services.AddSingleton<AplicacaoPagina>();
             //builder.Services.AddSingleton<EditarContatoPage>();

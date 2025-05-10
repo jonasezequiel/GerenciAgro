@@ -3,6 +3,7 @@
              x:Class="GerenciaAgro.Views.Controls.AplicacaoControle"
              Title="AplicacaoControle"
              BackgroundColor="White">
+    
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 

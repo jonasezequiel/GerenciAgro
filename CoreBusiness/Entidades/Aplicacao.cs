@@ -5,7 +5,6 @@ namespace CoreBusiness.Entidades;
 
 public class Aplicacao
 {
-    [Required]
     [PrimaryKey, AutoIncrement]
     public Guid Id { get; set; }
     [Required]
