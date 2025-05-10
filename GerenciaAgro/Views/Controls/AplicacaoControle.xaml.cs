@@ -7,7 +7,6 @@ public partial class AplicacaoControle : ContentPage
     {
         InitializeComponent();
 
-        // Exemplos de dados — você pode carregar de banco ou API
         CultivoPicker.ItemsSource = new List<string> { "Milho", "Soja", "Trigo" };
         PragaPicker.ItemsSource = new List<string> { "Lagarta", "Pulgão", "Broca" };
         AgrotoxicoPicker.ItemsSource = new List<string> { "Inseticida X", "Herbicida Y", "Fungicida Z" };

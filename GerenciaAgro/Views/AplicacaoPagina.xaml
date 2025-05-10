@@ -27,11 +27,11 @@
         </CollectionView>
 
         <!-- Botão para exportar PDF -->
-        <!--<Button Text="Exportar para PDF"
+        <Button Text="Exportar para PDF"
                 BackgroundColor="Green"
                 TextColor="White"
                 CornerRadius="10"
                 HorizontalOptions="Center"
-                Clicked="OnExportarPdfClicked" />-->
+                Clicked="OnExportarPdfClicked" />
     </VerticalStackLayout>
 </ContentPage>
