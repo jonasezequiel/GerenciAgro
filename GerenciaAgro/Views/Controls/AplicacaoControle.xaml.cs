@@ -17,8 +17,6 @@ public partial class AplicacaoControle : ContentPage
         CultivoPicker.ItemsSource = new List<string> { "Milho", "Soja", "Trigo" };
         PragaPicker.ItemsSource = new List<string> { "Lagarta", "Pulgão", "Broca" };
         AgrotoxicoPicker.ItemsSource = new List<string> { "Inseticida X", "Herbicida Y", "Fungicida Z" };
-
-        CultivoPicker.SelectedIndex = 0;
     }
 
     private async void OnRegistrarClicked(object sender, EventArgs e)
