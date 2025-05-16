@@ -32,6 +32,6 @@
                 TextColor="White"
                 CornerRadius="10"
                 HorizontalOptions="Center"
-                Clicked="OnExportarPdfClicked" />
+                Clicked="OnGerarPdfClicked" />
     </VerticalStackLayout>
 </ContentPage>

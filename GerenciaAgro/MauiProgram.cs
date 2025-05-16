@@ -4,6 +4,7 @@ using CasosDeUso.PluginsInterfaces;
 using GerenciaAgro.Views;
 using GerenciaAgro.Views.Controls;
 using Microsoft.Extensions.Logging;
+using System.Globalization;
 
 namespace GerenciaAgro
 {
@@ -12,6 +13,10 @@ namespace GerenciaAgro
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
+            var culture = new CultureInfo("pt-BR");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
 
             builder
                 .UseMauiApp<App>()

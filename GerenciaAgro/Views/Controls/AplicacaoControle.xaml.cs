@@ -8,6 +8,8 @@ public partial class AplicacaoControle : ContentPage
 {
     private readonly IAdicionarAplicacaoUseCase _adicionarAplicacaoUseCase;
 
+    public DateTime SelectedDate { get; set; } = DateTime.Today;
+
     public AplicacaoControle(IAdicionarAplicacaoUseCase adicionarAplicacaoUseCase)
     {
         InitializeComponent();

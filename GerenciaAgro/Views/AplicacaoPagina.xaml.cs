@@ -1,6 +1,6 @@
-using CasosDeUso.Interface;
-using PdfSharpCore.Drawing;
-using PdfSharpCore.Pdf;
+Ôªøusing CasosDeUso.Interface;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Grid;
 using System.Collections.ObjectModel;
 
 namespace GerenciaAgro.Views;
@@ -10,7 +10,7 @@ public partial class AplicacaoPagina : ContentPage
     private readonly IVisualizarAplicacaoUseCase _visualizarAplicacaoUseCase;
     private readonly IApagarAplicacaoUseCase _apagarAplicacaoUseCase;
 
-    // Propriedade que ser· vinculada ao CollectionView
+    // Propriedade que ser√° vinculada ao CollectionView
     public ObservableCollection<Item> Itens { get; set; } = new ObservableCollection<Item>();
 
     public AplicacaoPagina(IVisualizarAplicacaoUseCase visualizarAplicacaoUseCase,
@@ -22,122 +22,107 @@ public partial class AplicacaoPagina : ContentPage
 
         BindingContext = this;
 
-        // Carregar os itens ao inicializar a p·gina
         _ = CarregarAplicacoesAsync();
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await CarregarAplicacoesAsync(); 
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        Itens.Clear(); 
     }
 
     private async Task CarregarAplicacoesAsync()
     {
         try
         {
-            // Chama a implementaÁ„o da interface para buscar os dados
             var aplicacoes = await _visualizarAplicacaoUseCase.ExecutaListAsync(string.Empty);
-
-            // Limpa a coleÁ„o antes de adicionar novos itens
             Itens.Clear();
 
-            // Mapeia os dados de Aplicacao para Item e adiciona ‡ coleÁ„o
             foreach (var aplicacao in aplicacoes)
             {
                 Itens.Add(new Item
                 {
-                    Cultivo = aplicacao.Cultivo.Nome, // Supondo que Cultivo tem uma propriedade Nome
-                    Praga = string.Join(", ", aplicacao.PragasAlvos.Select(p => p.Nome)), // Supondo que Praga tem uma propriedade Nome
-                    Agrotoxico = aplicacao.Agrotoxico.Nome, // Supondo que Agrotoxico tem uma propriedade Nome
+                    Cultivo = aplicacao.Cultivo.Nome,
+                    Praga = string.Join(", ", aplicacao.PragasAlvos.Select(p => p.Nome)),
+                    Agrotoxico = aplicacao.Agrotoxico.Nome,
                     Data = aplicacao.DataAplicacao.DateTime
                 });
             }
         }
         catch (Exception ex)
         {
-            // Exibe uma mensagem de erro caso algo dÍ errado
-            await DisplayAlert("Erro", $"N„o foi possÌvel carregar as aplicaÁıes: {ex.Message}", "OK");
+            await DisplayAlert("Erro", $"N√£o foi poss√≠vel carregar as aplica√ß√µes: {ex.Message}", "OK");
         }
     }
 
-    private async void OnExportarPdfClicked(object sender, EventArgs e)
+    // M√©todo para gerar PDF
+    private async Task GerarPdfAsync()
     {
         try
         {
-            //Cria um novo documento PDF
-           var pdfDocument = new PdfDocument();
-            var pdfPage = pdfDocument.AddPage();
-            var graphics = XGraphics.FromPdfPage(pdfPage);
-            var font = new XFont("Arial", 12, XFontStyle.Regular);
-            var headerFont = new XFont("Arial", 14, XFontStyle.Bold);
+            using var document = new PdfDocument();
+            var page = document.Pages.Add();
 
-            // Define as larguras das colunas
-            double[] columnWidths = { 100, 150, 150, 100 };
-            double xStart = 20; // PosiÁ„o inicial no eixo X
-            double yPosition = 20; // PosiÁ„o inicial no eixo Y
+            var pdfGrid = new PdfGrid();
+            pdfGrid.Columns.Add(4);
 
-            //Adiciona o cabeÁalho do relatÛrio
+            // Adiciona o cabe√ßalho
+            pdfGrid.Headers.Add(1);
+            var header = pdfGrid.Headers[0];
+            header.Cells[0].Value = "Cultivo";
+            header.Cells[1].Value = "Praga";
+            header.Cells[2].Value = "Agrot√≥xico";
+            header.Cells[3].Value = "Data";
 
-           graphics.DrawString("RelatÛrio de AplicaÁıes", new XFont("Arial", 16, XFontStyle.Bold), XBrushes.Black, new XPoint(xStart, yPosition));
-            yPosition += 30;
-
-            // Desenha o cabeÁalho da tabela
-            string[] headers = { "Cultivo", "Praga", "AgrotÛxico", "Data" };
-            double xPosition = xStart;
-
-            foreach (var header in headers)
-            {
-                graphics.DrawString(header, headerFont, XBrushes.Black, new XPoint(xPosition, yPosition));
-                xPosition += columnWidths[Array.IndexOf(headers, header)];
-            }
-
-            yPosition += 20; // Move para a prÛxima linha
-
-            // Adiciona os dados da coleÁ„o
+            // Adiciona os dados
+            // Fix for the CS1503 error: Adjusting the way rows are added to the PdfGrid
             foreach (var item in Itens)
             {
-                xPosition = xStart;
-
-                // Cultivo
-                graphics.DrawString(item.Cultivo, font, XBrushes.Black, new XPoint(xPosition, yPosition));
-                xPosition += columnWidths[0];
-
-                // Praga
-                graphics.DrawString(item.Praga, font, XBrushes.Black, new XPoint(xPosition, yPosition));
-                xPosition += columnWidths[1];
-
-                // AgrotÛxico
-                graphics.DrawString(item.Agrotoxico, font, XBrushes.Black, new XPoint(xPosition, yPosition));
-                xPosition += columnWidths[2];
-
-                // Data
-                graphics.DrawString(item.Data.ToString("dd/MM/yyyy HH:mm"), font, XBrushes.Black, new XPoint(xPosition, yPosition));
-                xPosition += columnWidths[3];
-
-                yPosition += 20; // Move para a prÛxima linha
-
-                // Adiciona uma nova p·gina se necess·rio
-                if (yPosition > pdfPage.Height - 50)
-                {
-                    pdfPage = pdfDocument.AddPage();
-                    graphics = XGraphics.FromPdfPage(pdfPage);
-                    yPosition = 20;
-                }
+                var row = pdfGrid.Rows.Add(); // Add a new row to the PdfGrid
+                row.Cells[0].Value = item.Cultivo;
+                row.Cells[1].Value = item.Praga;
+                row.Cells[2].Value = item.Agrotoxico;
+                row.Cells[3].Value = item.Data.ToString("dd/MM/yyyy");
             }
 
-            // Salva o PDF em um local acessÌvel
-            var filePath = Path.Combine(FileSystem.AppDataDirectory, "RelatorioAplicacoes.pdf");
-            using (var stream = File.Create(filePath))
+
+            // Desenha a tabela no PDF
+            pdfGrid.Draw(page, new Syncfusion.Drawing.PointF(0, 0));
+
+            // Salva o PDF em um stream
+            using var stream = new MemoryStream();
+            document.Save(stream);
+            stream.Position = 0;
+
+            // Define o nome e o caminho do arquivo
+            var nomeArquivo = $"Aplicacoes_{DateTime.Now:yyyyMMddHHmmss}.pdf";
+            var caminho = Path.Combine(FileSystem.CacheDirectory, nomeArquivo);
+            File.WriteAllBytes(caminho, stream.ToArray());
+
+            // Abre o PDF no aplicativo padr√£o
+            await Launcher.Default.OpenAsync(new OpenFileRequest
             {
-                pdfDocument.Save(stream);
-            }
-
-            // Exibe uma mensagem de sucesso
-            await DisplayAlert("Sucesso", $"PDF exportado para: {filePath}", "OK");
+                File = new ReadOnlyFile(caminho)
+            });
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Erro", $"Ocorreu um erro ao exportar o PDF: {ex.Message}", "OK");
+            await DisplayAlert("Erro", $"Falha ao gerar o PDF: {ex.Message}", "OK");
         }
+    }
+
+    private async void OnGerarPdfClicked(object sender, EventArgs e)
+    {
+        await GerarPdfAsync();
     }
 }
 
-// Classe que representa os itens exibidos no CollectionView
 public class Item
 {
     public string Cultivo { get; set; }
