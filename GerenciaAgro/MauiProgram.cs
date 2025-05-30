@@ -1,9 +1,11 @@
 ﻿using CasosDeUso;
 using CasosDeUso.Interface;
 using CasosDeUso.PluginsInterfaces;
+using DadosEmMemoria;
 using GerenciaAgro.Views;
 using GerenciaAgro.Views.Controls;
 using Microsoft.Extensions.Logging;
+using SqlLite;
 using System.Globalization;
 
 namespace GerenciaAgro
@@ -42,6 +44,7 @@ namespace GerenciaAgro
             builder.Services.AddSingleton<SelecaoItemCadastro>();
             builder.Services.AddSingleton<AplicacaoControle>();
             builder.Services.AddSingleton<AgrotoxicoControle>();
+            builder.Services.AddSingleton<IRepositorioDeAplicacao, RepositorioAplicacaoSqlLite>();
             //builder.Services.AddSingleton<EditarContatoPage>();
             //builder.Services.AddSingleton<AdicionarContatoPage>();
 

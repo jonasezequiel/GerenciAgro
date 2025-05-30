@@ -102,6 +102,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\CasosDeUso\CasosDeUso.csproj" />
+		<ProjectReference Include="..\CoreBusiness\CoreBusiness.csproj" />
 		<ProjectReference Include="..\DadosEmMemoria\DadosEmMemoria.csproj" />
 		<ProjectReference Include="..\SqlLite\SqlLite.csproj" />
 	</ItemGroup>

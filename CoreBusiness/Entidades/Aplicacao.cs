@@ -8,12 +8,12 @@ public class Aplicacao
     [PrimaryKey, AutoIncrement]
     public Guid Id { get; set; }
     [Required]
-    public Agrotoxico Agrotoxico { get; set; }
+    public Guid AgrotoxicoId { get; set; }
     [Required]
-    public Cultivo Cultivo { get; set; }
+    public Guid CultivoId { get; set; }
     public DateTimeOffset DataAplicacao { get; set; }
     [Required]
-    public IEnumerable<Praga> PragasAlvos { get; set; }
+    public IEnumerable<Guid> PragasAlvos { get; set; }
     public string? Observacao { get; set; }
 
     public Aplicacao()

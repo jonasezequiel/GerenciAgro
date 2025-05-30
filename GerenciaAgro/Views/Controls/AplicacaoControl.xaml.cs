@@ -16,24 +16,46 @@ public partial class AplicacaoControle : ContentPage
 
         _adicionarAplicacaoUseCase = adicionarAplicacaoUseCase;
 
-        CultivoPicker.ItemsSource = new List<string> { "Milho", "Soja", "Trigo" };
-        PragaPicker.ItemsSource = new List<string> { "Lagarta", "Pulgão", "Broca" };
-        AgrotoxicoPicker.ItemsSource = new List<string> { "Inseticida X", "Herbicida Y", "Fungicida Z" };
+        CultivoPicker.ItemsSource = new List<Cultivo>
+        {
+            new Cultivo {Nome = "Milho", Id = Guid.NewGuid() },
+            new Cultivo { Nome = "Soja", Id = Guid.NewGuid() },
+            new Cultivo { Nome = "Trigo", Id = Guid.NewGuid() }
+        };
+
+        PragaPicker.ItemsSource = new List<Praga> 
+        {
+            new Praga { Nome = "Lagarta", Id = Guid.NewGuid() },
+            new Praga { Nome = "Pulgão", Id = Guid.NewGuid() },
+            new Praga { Nome = "Cochonilha", Id = Guid.NewGuid() }
+        };
+
+        AgrotoxicoPicker.ItemsSource = new List<Agrotoxico>
+        {
+            new Agrotoxico { Nome = "Agrotoxina A", Lote = "Lote001", Id = Guid.NewGuid(), Validade = DateTimeOffset.Now.AddDays(60) },
+            new Agrotoxico { Nome = "Agrotoxina B", Lote = "Lote002", Id = Guid.NewGuid(), Validade = DateTimeOffset.Now.AddDays(90) },
+            new Agrotoxico { Nome = "Agrotoxina C", Lote = "Lote003", Id = Guid.NewGuid(), Validade = DateTimeOffset.Now.AddDays(120) }
+        };
     }
 
     private async void OnRegistrarClicked(object sender, EventArgs e)
     {
-        var cultivo = CultivoPicker.SelectedItem?.ToString() ?? "Não selecionado";
-        var praga = PragaPicker.SelectedItem?.ToString() ?? "Não selecionado";
-        var agrotoxico = AgrotoxicoPicker.SelectedItem?.ToString() ?? "Não selecionado";
+        var cultivo = (CultivoPicker.SelectedItem as Cultivo)?.Id;
+        var praga = (PragaPicker.SelectedItem as Praga)?.Id;
+        var agrotoxico = (AgrotoxicoPicker.SelectedItem as Agrotoxico)?.Id;
         var observacao = ObservacaoEntry.Text;
         var data = DataPicker.Date;
 
+        if (praga == null)
+        {
+            throw new Exception("Praga não selecionada");
+        }
+
         var aplicacao = new Aplicacao
         {
-            Agrotoxico = new Agrotoxico { Nome = agrotoxico, Lote = "TESTE001" },
-            Cultivo = new Cultivo { Nome = cultivo },
-            PragasAlvos = new List<Praga> { new Praga { Nome = praga } },
+            AgrotoxicoId = agrotoxico ?? throw new Exception("Agrotoxico não selecionado"),
+            CultivoId = cultivo ?? throw new Exception("Cultivo não selecionado"),
+            PragasAlvos = new List<Guid> { praga.Value },
             Observacao = observacao,
             DataAplicacao = data
         };
