@@ -41,6 +41,7 @@ namespace GerenciaAgro
             builder.Services.AddSingleton<AplicacaoPagina>();
             builder.Services.AddSingleton<SelecaoItemCadastro>();
             builder.Services.AddSingleton<AplicacaoControle>();
+            builder.Services.AddSingleton<AgrotoxicoControle>();
             //builder.Services.AddSingleton<EditarContatoPage>();
             //builder.Services.AddSingleton<AdicionarContatoPage>();
 

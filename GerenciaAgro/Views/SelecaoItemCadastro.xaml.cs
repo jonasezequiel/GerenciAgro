@@ -12,6 +12,10 @@ public partial class SelecaoItemCadastro : ContentPage
     private async void onRetornaPaginaPrincipal(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync($"///{nameof(AplicacaoControle)}");
-
+    }
+    
+    private async void OnAgrotoxicoClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(AgrotoxicoControle));
     }
 }

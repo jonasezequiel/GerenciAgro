@@ -27,6 +27,7 @@
                     CornerRadius="10"
                     HeightRequest="60"
                     Margin="0,10"
+                    Clicked="OnAgrotoxicoClicked"
                     x:Name="AgrotoxicoButton"/>
             <Button Text="PRAGA"
                     BackgroundColor="Green"

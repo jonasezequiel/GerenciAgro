@@ -11,6 +11,7 @@ namespace GerenciaAgro
             Routing.RegisterRoute(nameof(AplicacaoPagina), typeof(AplicacaoPagina));
             Routing.RegisterRoute(nameof(SelecaoItemCadastro), typeof(SelecaoItemCadastro));
             Routing.RegisterRoute(nameof(AplicacaoControle), typeof(AplicacaoControle));
+            Routing.RegisterRoute(nameof(AgrotoxicoControle), typeof(AgrotoxicoControle));
         }
     }
 }
