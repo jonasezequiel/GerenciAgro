@@ -1,0 +1,52 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GerenciaAgro.Views.Controls.AgrotoxicoControle"
+             Title="AgrotoxicoControle"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Logo e título -->
+            <Image Source="logo.jpeg" HorizontalOptions="Center" HeightRequest="100"/>
+            <Label Text="CADASTRO AGROTÓXICO" FontSize="24" FontAttributes="Bold" TextColor="Green" HorizontalOptions="Center" />
+
+            <!-- Campo Nome -->
+            <Label Text="NOME" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                <Entry x:Name="NomeEntry" TextColor="Black" BackgroundColor="White" />
+            </Frame>
+
+            <!-- Campo Lote -->
+            <Label Text="LOTE" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
+                <Entry x:Name="LoteEntry" TextColor="Black" BackgroundColor="White" />
+            </Frame>
+
+            <!-- Campo Validade -->
+            <Label Text="VALIDADE" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
+                <DatePicker x:Name="ValidadePicker" TextColor="Black" BackgroundColor="White" />
+            </Frame>
+
+            <!-- Campo Praga Alvo -->
+            <Label Text="PRAGAS ALVO" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
+                <Picker x:Name="PragaAlvoPicker" TextColor="Black" BackgroundColor="White" />
+            </Frame>
+
+            <!-- Botão Registrar -->
+            <Button Text="REGISTRAR"
+                    BackgroundColor="Green"
+                    TextColor="Black"
+                    CornerRadius="10" />
+
+            <!-- Rodapé com botões -->
+            <Grid ColumnDefinitions="*,*" HeightRequest="70" BackgroundColor="Green">
+                <ImageButton Source="anotacao.png" BackgroundColor="Transparent" />
+                <ImageButton Source="livro.png" Grid.Column="1" BackgroundColor="Transparent" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

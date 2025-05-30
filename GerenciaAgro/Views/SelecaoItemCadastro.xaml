@@ -1,0 +1,65 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GerenciaAgro.Views.SelecaoItemCadastro"
+             Title="Seleção de Cadastro"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="30">
+
+            <!-- Logo e título -->
+            <Image Source="logo.jpeg" HorizontalOptions="Center" HeightRequest="100"/>
+            <Label Text="ESCOLHA O CADASTRO" FontSize="24" FontAttributes="Bold" TextColor="Green" HorizontalOptions="Center" />
+
+            <!-- Botões de seleção -->
+            <Button Text="CULTIVO"
+                    BackgroundColor="Green"
+                    TextColor="Black"
+                    FontSize="20"
+                    CornerRadius="10"
+                    HeightRequest="60"
+                    Margin="0,10"
+                    x:Name="CultivoButton"/>
+            <Button Text="AGROTÓXICO"
+                    BackgroundColor="Green"
+                    TextColor="Black"
+                    FontSize="20"
+                    CornerRadius="10"
+                    HeightRequest="60"
+                    Margin="0,10"
+                    x:Name="AgrotoxicoButton"/>
+            <Button Text="PRAGA"
+                    BackgroundColor="Green"
+                    TextColor="Black"
+                    FontSize="20"
+                    CornerRadius="10"
+                    HeightRequest="60"
+                    Margin="0,10"
+                    x:Name="PragaButton"/>
+
+            <!-- Rodapé com botões -->
+            <Frame
+    Padding="0"
+    Margin="0,30,0,0"
+    HeightRequest="70"
+    WidthRequest="70"
+    CornerRadius="35"
+    BackgroundColor="Green"
+    HasShadow="True"
+    HorizontalOptions="Center"
+    VerticalOptions="Center">
+                <ImageButton
+        Source="home.png"
+        BackgroundColor="Transparent"
+        HeightRequest="50"
+        WidthRequest="50"
+        Clicked="onRetornaPaginaPrincipal"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"
+        CornerRadius="25"
+        />
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

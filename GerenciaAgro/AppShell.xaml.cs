@@ -1,4 +1,5 @@
 ﻿using GerenciaAgro.Views;
+using GerenciaAgro.Views.Controls;
 
 namespace GerenciaAgro
 {
@@ -8,6 +9,8 @@ namespace GerenciaAgro
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(AplicacaoPagina), typeof(AplicacaoPagina));
+            Routing.RegisterRoute(nameof(SelecaoItemCadastro), typeof(SelecaoItemCadastro));
+            Routing.RegisterRoute(nameof(AplicacaoControle), typeof(AplicacaoControle));
         }
     }
 }

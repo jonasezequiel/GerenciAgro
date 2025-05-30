@@ -39,6 +39,8 @@ namespace GerenciaAgro
             builder.Services.AddTransient<AplicacaoControle>();
             #endregion
             builder.Services.AddSingleton<AplicacaoPagina>();
+            builder.Services.AddSingleton<SelecaoItemCadastro>();
+            builder.Services.AddSingleton<AplicacaoControle>();
             //builder.Services.AddSingleton<EditarContatoPage>();
             //builder.Services.AddSingleton<AdicionarContatoPage>();
 

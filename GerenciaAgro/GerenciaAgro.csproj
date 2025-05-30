@@ -65,11 +65,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\AdicionarAplicacao.xaml.cs">
-	    <DependentUpon>AdicionarAplicacao.xaml</DependentUpon>
+	  <Compile Update="Views\SelecaoItemCadastro.xaml.cs">
+	    <DependentUpon>SelecaoItemCadastro.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Controls\AplicacaoControle.xaml.cs">
-	    <DependentUpon>AplicacaoControle.xaml</DependentUpon>
+	  <Compile Update="Views\Controls\AplicacaoControl.xaml.cs">
+	    <DependentUpon>AplicacaoControl.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Controls\AgrotoxicoControle.xaml.cs">
+	    <DependentUpon>AgrotoxicoControle.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\EditarAplicacao.xaml.cs">
 	    <DependentUpon>EditarAplicacao.xaml</DependentUpon>
@@ -80,10 +83,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\AdicionarAplicacao.xaml">
+	  <MauiXaml Update="Views\SelecaoItemCadastro.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Controls\AplicacaoControle.xaml">
+	  <MauiXaml Update="Views\Controls\AplicacaoControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Controls\AgrotoxicoControle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\EditarAplicacao.xaml">

@@ -31,7 +31,7 @@ public partial class AplicacaoControle : ContentPage
 
         var aplicacao = new Aplicacao
         {
-            Agrotoxico = new Agrotoxico { Nome = agrotoxico, Lote="TESTE001" },
+            Agrotoxico = new Agrotoxico { Nome = agrotoxico, Lote = "TESTE001" },
             Cultivo = new Cultivo { Nome = cultivo },
             PragasAlvos = new List<Praga> { new Praga { Nome = praga } },
             Observacao = observacao,
@@ -47,4 +47,10 @@ public partial class AplicacaoControle : ContentPage
     {
         await Shell.Current.GoToAsync($"{nameof(AplicacaoPagina)}");
     }
+
+    private async void onRegistrarItemClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(SelecaoItemCadastro));
+    }
+
 }
