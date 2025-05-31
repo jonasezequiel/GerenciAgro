@@ -1,4 +1,4 @@
-﻿using CasosDeUso.Interface;
+﻿using CasosDeUso.Interface.IAgrotoxicoUseCase;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Grid;
 using System.Collections.ObjectModel;

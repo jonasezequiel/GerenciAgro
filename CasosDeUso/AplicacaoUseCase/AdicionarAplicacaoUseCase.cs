@@ -1,8 +1,8 @@
-﻿using CasosDeUso.Interface;
-using CasosDeUso.PluginsInterfaces;
+﻿using CasosDeUso.Interface.IAplicacaoUseCase;
+using CasosDeUso.PluginsInterface;
 using CoreBusiness.Entidades;
 
-namespace CasosDeUso;
+namespace CasosDeUso.AplicacaoUseCase;
 
 public class AdicionarAplicacaoUseCase : IAdicionarAplicacaoUseCase
 {

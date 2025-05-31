@@ -1,8 +1,8 @@
 ﻿using CoreBusiness.Entidades;
 
-namespace CasosDeUso.Interface
+namespace CasosDeUso.Interface.IAplicacaoUseCase
 {
-    public interface IApagarAplicacaoUseCase
+    public interface IEditarAplicacaoUseCase
     {
         Task ExecutaAsync(Aplicacao aplicacao);
     }

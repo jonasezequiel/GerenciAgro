@@ -1,6 +1,6 @@
 ﻿using CoreBusiness.Entidades;
 
-namespace CasosDeUso.PluginsInterfaces;
+namespace CasosDeUso.PluginsInterface;
 
 public interface IRepositorioDeAplicacao
 {
