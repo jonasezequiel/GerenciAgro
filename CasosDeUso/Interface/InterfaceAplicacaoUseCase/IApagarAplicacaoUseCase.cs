@@ -1,6 +1,6 @@
 ﻿using CoreBusiness.Entidades;
 
-namespace CasosDeUso.Interface
+namespace CasosDeUso.Interface.InterfaceAplicacaoUseCase
 {
     public interface IApagarAplicacaoUseCase
     {

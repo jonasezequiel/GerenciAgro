@@ -1,42 +1,40 @@
 namespace GerenciaAgro.Views.Controls;
 
-using CasosDeUso.Interface;
+using CasosDeUso.Interface.InterfaceAgrotoxicoUseCase;
+using CasosDeUso.Interface.InterfaceAplicacaoUseCase;
+using CasosDeUso.Interface.InterfaceCultivoUseCase;
+using CasosDeUso.Interface.InterfacePragaUseCase;
 using CoreBusiness.Entidades;
 using Microsoft.Maui.Controls;
 
 public partial class AplicacaoControle : ContentPage
 {
     private readonly IAdicionarAplicacaoUseCase _adicionarAplicacaoUseCase;
+    private readonly IVisualizarCultivoUseCase _visualizarCultivoUseCase;
+    private readonly IVisualizarPragaUseCase _visualizarPragaUseCase;
+    private readonly IVisualizarAgrotoxicoUseCase _visualizarAgrotoxicoUseCase;
+
 
     public DateTime SelectedDate { get; set; } = DateTime.Today;
 
-    public AplicacaoControle(IAdicionarAplicacaoUseCase adicionarAplicacaoUseCase)
+    public AplicacaoControle(
+    IAdicionarAplicacaoUseCase adicionarAplicacaoUseCase,
+    IVisualizarCultivoUseCase visualizarCultivoUseCase,
+    IVisualizarPragaUseCase visualizarPragaUseCase,
+    IVisualizarAgrotoxicoUseCase visualizarAgrotoxicoUseCase)
     {
         InitializeComponent();
 
         _adicionarAplicacaoUseCase = adicionarAplicacaoUseCase;
+        _visualizarCultivoUseCase = visualizarCultivoUseCase;
+        _visualizarPragaUseCase = visualizarPragaUseCase;
+        _visualizarAgrotoxicoUseCase = visualizarAgrotoxicoUseCase;
 
-        CultivoPicker.ItemsSource = new List<Cultivo>
-        {
-            new Cultivo {Nome = "Milho", Id = Guid.NewGuid() },
-            new Cultivo { Nome = "Soja", Id = Guid.NewGuid() },
-            new Cultivo { Nome = "Trigo", Id = Guid.NewGuid() }
-        };
-
-        PragaPicker.ItemsSource = new List<Praga> 
-        {
-            new Praga { Nome = "Lagarta", Id = Guid.NewGuid() },
-            new Praga { Nome = "Pulgão", Id = Guid.NewGuid() },
-            new Praga { Nome = "Cochonilha", Id = Guid.NewGuid() }
-        };
-
-        AgrotoxicoPicker.ItemsSource = new List<Agrotoxico>
-        {
-            new Agrotoxico { Nome = "Agrotoxina A", Lote = "Lote001", Id = Guid.NewGuid(), Validade = DateTimeOffset.Now.AddDays(60) },
-            new Agrotoxico { Nome = "Agrotoxina B", Lote = "Lote002", Id = Guid.NewGuid(), Validade = DateTimeOffset.Now.AddDays(90) },
-            new Agrotoxico { Nome = "Agrotoxina C", Lote = "Lote003", Id = Guid.NewGuid(), Validade = DateTimeOffset.Now.AddDays(120) }
-        };
+        _ = CarregarCultivosAsync();
+        _ = CarregarPragasAsync();
+        _ = CarregarAgrotoxicoAsync();
     }
+
 
     private async void OnRegistrarClicked(object sender, EventArgs e)
     {
@@ -75,4 +73,42 @@ public partial class AplicacaoControle : ContentPage
         await Shell.Current.GoToAsync(nameof(SelecaoItemCadastro));
     }
 
+    private async Task CarregarCultivosAsync()
+    {
+        try
+        {
+            var cultivos = await _visualizarCultivoUseCase.ExecutaListAsync("");
+            CultivoPicker.ItemsSource = cultivos.ToList();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", $"Não foi possível carregar os cultivos: {ex.Message}", "OK");
+        }
+    }
+
+    private async Task CarregarPragasAsync()
+    {
+        try
+        {
+            var pragas = await _visualizarPragaUseCase.ExecutaListAsync("");
+            PragaPicker.ItemsSource = pragas.ToList();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", $"Não foi possível carregar as pragas: {ex.Message}", "OK");
+        }
+    }
+
+    private async Task CarregarAgrotoxicoAsync()
+    {
+        try
+        {
+            var agrotoxicos = await _visualizarAgrotoxicoUseCase.ExecutaListAsync("");
+            AgrotoxicoPicker.ItemsSource = agrotoxicos.ToList();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", $"Não foi possível carregar os agrotoxicos: {ex.Message}", "OK");
+        }
+    }
 }

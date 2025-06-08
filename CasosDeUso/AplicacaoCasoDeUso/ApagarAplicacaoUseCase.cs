@@ -1,8 +1,8 @@
-﻿using CasosDeUso.Interface;
+﻿using CasosDeUso.Interface.InterfaceAplicacaoUseCase;
 using CasosDeUso.PluginsInterfaces;
 using CoreBusiness.Entidades;
 
-namespace CasosDeUso;
+namespace CasosDeUso.AplicacaoCasoDeUso;
 
 public class ApagarAplicacaoUseCase : IApagarAplicacaoUseCase
 {
@@ -13,8 +13,8 @@ public class ApagarAplicacaoUseCase : IApagarAplicacaoUseCase
         _aplicacaoRepository = repositorioDeAplicacao ?? throw new ArgumentNullException(nameof(repositorioDeAplicacao));
     }
 
-    public async Task ExecutaAsync(Aplicacao contato)
+    public async Task ExecutaAsync(Aplicacao aplicacao)
     {
-        await _aplicacaoRepository.ExcluirAplicacaoAsync(contato);
+        await _aplicacaoRepository.ExcluirAplicacaoAsync(aplicacao);
     }
 }

@@ -1,8 +1,8 @@
-﻿using CasosDeUso.Interface;
+﻿using CasosDeUso.Interface.InterfaceAplicacaoUseCase;
 using CasosDeUso.PluginsInterfaces;
 using CoreBusiness.Entidades;
 
-namespace CasosDeUso;
+namespace CasosDeUso.AplicacaoCasoDeUso;
 
 public class EditarAplicacaoUseCase : IEditarAplicacaoUseCase
 {
@@ -20,8 +20,8 @@ public class EditarAplicacaoUseCase : IEditarAplicacaoUseCase
             return;
         }
 
-        aplicacaoSelecinada.Agrotoxico = aplicacao.Agrotoxico;
-        aplicacaoSelecinada.Cultivo = aplicacao.Cultivo;
+        aplicacaoSelecinada.AgrotoxicoId = aplicacao.AgrotoxicoId;
+        aplicacaoSelecinada.CultivoId = aplicacao.CultivoId;
         aplicacaoSelecinada.DataAplicacao = aplicacao.DataAplicacao;
         aplicacaoSelecinada.PragasAlvos = aplicacao.PragasAlvos;
         await _aplicacaoRepository.AtualizarAplicacaoAsync(aplicacaoSelecinada);

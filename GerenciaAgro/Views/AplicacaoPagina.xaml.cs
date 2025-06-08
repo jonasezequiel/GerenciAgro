@@ -1,4 +1,9 @@
-﻿using CasosDeUso.Interface;
+﻿using CasosDeUso.Interface.InterfaceAgrotoxicoUseCase;
+using CasosDeUso.Interface.InterfaceAplicacaoUseCase;
+using CasosDeUso.Interface.InterfaceCultivoUseCase;
+using CasosDeUso.Interface.InterfacePragaUseCase;
+using CoreBusiness.Entidades;
+using GerenciaAgro.Views.Controls;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Grid;
 using System.Collections.ObjectModel;
@@ -9,20 +14,27 @@ public partial class AplicacaoPagina : ContentPage
 {
     private readonly IVisualizarAplicacaoUseCase _visualizarAplicacaoUseCase;
     private readonly IApagarAplicacaoUseCase _apagarAplicacaoUseCase;
+    private readonly IVisualizarAgrotoxicoUseCase _visualizarAgrotoxicoUseCase;
+    private readonly IVisualizarCultivoUseCase _visualizarCultivoUseCase;
+    private readonly IVisualizarPragaUseCase _visualizarPragaUseCase;
 
     // Propriedade que será vinculada ao CollectionView
     public ObservableCollection<Item> Itens { get; set; } = new ObservableCollection<Item>();
 
     public AplicacaoPagina(IVisualizarAplicacaoUseCase visualizarAplicacaoUseCase,
-                          IApagarAplicacaoUseCase apagarAplicacaoUseCase)
+                          IApagarAplicacaoUseCase apagarAplicacaoUseCase,
+                          IVisualizarAgrotoxicoUseCase visualizarAgrotoxicoUseCase,
+                          IVisualizarCultivoUseCase visualizarCultivoUseCase,
+                          IVisualizarPragaUseCase visualizarPragaUseCase)
     {
         InitializeComponent();
         this._visualizarAplicacaoUseCase = visualizarAplicacaoUseCase;
         this._apagarAplicacaoUseCase = apagarAplicacaoUseCase;
 
+        _visualizarAgrotoxicoUseCase = visualizarAgrotoxicoUseCase;
+        _visualizarCultivoUseCase = visualizarCultivoUseCase;
+        _visualizarPragaUseCase = visualizarPragaUseCase;
         BindingContext = this;
-
-        _ = CarregarAplicacoesAsync();
     }
 
     protected override async void OnAppearing()
@@ -41,23 +53,29 @@ public partial class AplicacaoPagina : ContentPage
     {
         try
         {
-            var aplicacoes = await _visualizarAplicacaoUseCase.ExecutaListAsync(string.Empty);
+            var aplicacoes = await _visualizarAplicacaoUseCase.ExecutaListAsync("");
             Itens.Clear();
 
             foreach (var aplicacao in aplicacoes)
             {
+                var cultivo = await CarregarCultivoAsync(aplicacao);
+                var agrotoxico = await CarregarAgrotoxicoAsync(aplicacao);
+                var Praga = await CarregarPragaAsync(aplicacao);
+
                 Itens.Add(new Item
                 {
-                    Cultivo = aplicacao.Cultivo.Nome,
-                    Praga = string.Join(", ", aplicacao.PragasAlvos.Select(p => p.Nome)),
-                    Agrotoxico = aplicacao.Agrotoxico.Nome,
+                    Cultivo = cultivo?.Nome ?? "",
+                    Praga = Praga?.Nome ?? "", // Ajuste conforme necessário para exibir as pragas corretamente
+                    Agrotoxico = agrotoxico?.Nome ?? "",
                     Data = aplicacao.DataAplicacao.DateTime
                 });
             }
+
         }
         catch (Exception ex)
         {
             await DisplayAlert("Erro", $"Não foi possível carregar as aplicações: {ex.Message}", "OK");
+            await Shell.Current.GoToAsync($"///{nameof(AplicacaoControle)}");
         }
     }
 
@@ -120,6 +138,72 @@ public partial class AplicacaoPagina : ContentPage
     private async void OnGerarPdfClicked(object sender, EventArgs e)
     {
         await GerarPdfAsync();
+    }
+
+    private async Task<Cultivo> CarregarCultivoAsync(Aplicacao aplicacao)
+    {
+        try
+        {
+            var cultivos = await _visualizarCultivoUseCase.ExecutaListAsync("");
+            var cultivo = await _visualizarCultivoUseCase.ExecutaAsync(aplicacao.CultivoId);
+            return cultivo;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", $"Não foi possível carregar os cultivos: {ex.Message}", "OK");
+            return null;
+        }
+    }
+
+    //TODO: Corrigir para quando for exibir a lista de pragas alvos
+    private async Task<Praga> CarregarPragaAsync(Aplicacao aplicacao)
+    {
+        try
+        {
+            var pragas = await CarregarPragasAsync(aplicacao.PragasAlvos);
+            return pragas.FirstOrDefault();
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", $"Não foi possível carregar as pragas: {ex.Message}", "OK");
+            return null;
+        }
+    }
+
+    private async Task<List<Praga>> CarregarPragasAsync(IEnumerable<Guid> pragasAlvos)
+    {
+        try
+        {
+            var pragas = new List<Praga>();
+            foreach (var pragaId in pragasAlvos)
+            {
+                var praga = await _visualizarPragaUseCase.ExecutaAsync(pragaId);
+                if (praga != null)
+                {
+                    pragas.Add(praga);
+                }
+            }
+            return pragas;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", $"Não foi possível carregar as pragas: {ex.Message}", "OK");
+            return new List<Praga>();
+        }
+    }
+
+    private async Task<Agrotoxico> CarregarAgrotoxicoAsync(Aplicacao aplicacao)
+    {
+        try
+        {
+            var agrotoxico = await _visualizarAgrotoxicoUseCase.ExecutaAsync(aplicacao.AgrotoxicoId);
+            return agrotoxico;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", $"Não foi possível carregar os agrotoxicos: {ex.Message}", "OK");
+            return null;
+        }
     }
 }
 
