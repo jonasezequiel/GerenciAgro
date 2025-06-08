@@ -90,9 +90,8 @@ public partial class AplicacaoPagina : ContentPage
             var page = document.Pages.Add();
 
             var pdfGrid = new PdfGrid();
-            pdfGrid.Columns.Add(4);
+            pdfGrid.Columns.Add(6);
 
-            // Adiciona o cabeçalho
             pdfGrid.Headers.Add(1);
             var header = pdfGrid.Headers[0];
             header.Cells[0].Value = "Cultivo";
@@ -102,11 +101,9 @@ public partial class AplicacaoPagina : ContentPage
             header.Cells[4].Value = "Validade do Agrotoxico";
             header.Cells[5].Value = "Data";
 
-            // Adiciona os dados
-            // Fix for the CS1503 error: Adjusting the way rows are added to the PdfGrid
             foreach (var item in Itens)
             {
-                var row = pdfGrid.Rows.Add(); // Add a new row to the PdfGrid
+                var row = pdfGrid.Rows.Add(); 
                 row.Cells[0].Value = item.Cultivo;
                 row.Cells[1].Value = item.Praga;
                 row.Cells[2].Value = item.Agrotoxico;
