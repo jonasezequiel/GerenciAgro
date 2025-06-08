@@ -67,7 +67,9 @@ public partial class AplicacaoPagina : ContentPage
                     Cultivo = cultivo?.Nome ?? "",
                     Praga = Praga?.Nome ?? "", // Ajuste conforme necessário para exibir as pragas corretamente
                     Agrotoxico = agrotoxico?.Nome ?? "",
-                    Data = aplicacao.DataAplicacao.DateTime
+                    LoteAgrotoxico = agrotoxico?.Lote ?? "",
+                    ValidadeAgrotoxico = agrotoxico?.Validade.ToString("dd/MM/yyyy") ?? "",
+                    DataAplicacao = aplicacao.DataAplicacao.DateTime
                 });
             }
 
@@ -96,7 +98,9 @@ public partial class AplicacaoPagina : ContentPage
             header.Cells[0].Value = "Cultivo";
             header.Cells[1].Value = "Praga";
             header.Cells[2].Value = "Agrotóxico";
-            header.Cells[3].Value = "Data";
+            header.Cells[3].Value = "Lote do Agrotoxico";
+            header.Cells[4].Value = "Validade do Agrotoxico";
+            header.Cells[5].Value = "Data";
 
             // Adiciona os dados
             // Fix for the CS1503 error: Adjusting the way rows are added to the PdfGrid
@@ -106,7 +110,9 @@ public partial class AplicacaoPagina : ContentPage
                 row.Cells[0].Value = item.Cultivo;
                 row.Cells[1].Value = item.Praga;
                 row.Cells[2].Value = item.Agrotoxico;
-                row.Cells[3].Value = item.Data.ToString("dd/MM/yyyy");
+                row.Cells[3].Value = item.LoteAgrotoxico;
+                row.Cells[4].Value = item.ValidadeAgrotoxico;
+                row.Cells[5].Value = item.DataAplicacao.ToString("dd/MM/yyyy");
             }
 
 
@@ -212,5 +218,7 @@ public class Item
     public string Cultivo { get; set; }
     public string Praga { get; set; }
     public string Agrotoxico { get; set; }
-    public DateTime Data { get; set; }
+    public string LoteAgrotoxico { get; set; }
+    public string ValidadeAgrotoxico { get; set; }
+    public DateTime DataAplicacao { get; set; }
 }

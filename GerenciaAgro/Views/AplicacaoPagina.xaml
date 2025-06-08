@@ -7,24 +7,27 @@
 
         <CollectionView x:Name="ItensCollectionView" ItemsSource="{Binding Itens}">
             <CollectionView.Header>
-                <Grid ColumnDefinitions="*,*,*,*" BackgroundColor="LightGray" Padding="5">
+                <Grid ColumnDefinitions="*,*,*,*,*" BackgroundColor="LightGray" Padding="5">
                     <Label Text="CULTIVO" FontAttributes="Bold" />
                     <Label Text="PRAGA" FontAttributes="Bold" Grid.Column="1" />
                     <Label Text="AGROTÓXICO" FontAttributes="Bold" Grid.Column="2" />
-                    <Label Text="DATA" FontAttributes="Bold" Grid.Column="3" />
+                    <Label Text="LOTE" FontAttributes="Bold" Grid.Column="3" />
+                    <Label Text="DATA" FontAttributes="Bold" Grid.Column="4" />
                 </Grid>
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="*,*,*,*" Padding="5">
+                    <Grid ColumnDefinitions="*,*,*,*,*" Padding="5">
                         <Label Text="{Binding Cultivo}" />
                         <Label Text="{Binding Praga}" Grid.Column="1" />
                         <Label Text="{Binding Agrotoxico}" Grid.Column="2" />
-                        <Label Text="{Binding Data, StringFormat='{0:dd/MM/yyyy HH:mm}'}" Grid.Column="3" />
+                        <Label Text="{Binding LoteAgrotoxico}" Grid.Column="3" />
+                        <Label Text="{Binding DataAplicacao, StringFormat='{0:dd/MM/yyyy HH:mm}'}" Grid.Column="4" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
 
         <!-- Botão para exportar PDF -->
         <Button Text="Exportar para PDF"

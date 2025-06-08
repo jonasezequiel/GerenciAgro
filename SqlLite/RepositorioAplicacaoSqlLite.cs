@@ -127,9 +127,10 @@ namespace SqlLite
             AgrotoxicoId = aplicacao.AgrotoxicoId.ToString();
             CultivoId = aplicacao.CultivoId.ToString();
             DataAplicacao = aplicacao.DataAplicacao.ToString();
-            PragasAlvos = aplicacao.PragasAlvos.ToString();
+            PragasAlvos = string.Join(",", aplicacao.PragasAlvos.Select(g => g.ToString()));
             Observacao = aplicacao.Observacao;
         }
+
 
         public Aplicacao ToAplicacao()
         {

@@ -44,23 +44,30 @@ public partial class AplicacaoControle : ContentPage
         var observacao = ObservacaoEntry.Text;
         var data = DataPicker.Date;
 
-        if (praga == null)
+        try
         {
-            throw new Exception("Praga não selecionada");
+            if (praga == null)
+            {
+                throw new Exception("Praga não selecionada");
+            }
+
+            var aplicacao = new Aplicacao
+            {
+                AgrotoxicoId = agrotoxico ?? throw new Exception("Agrotoxico não selecionado"),
+                CultivoId = cultivo ?? throw new Exception("Cultivo não selecionado"),
+                PragasAlvos = new List<Guid> { praga.Value },
+                Observacao = observacao,
+                DataAplicacao = data
+            };
+
+            await _adicionarAplicacaoUseCase.ExecutaAsync(aplicacao);
+
+            await DisplayAlert("Registro", $"Cultivo: {cultivo}\nPraga: {praga}\nAgrotóxico: {agrotoxico}\nObs: {observacao}\nData: {data}", "OK");
+        } catch (Exception ex)
+        {
+            await DisplayAlert("Erro", ex.Message, "OK");
+            return;
         }
-
-        var aplicacao = new Aplicacao
-        {
-            AgrotoxicoId = agrotoxico ?? throw new Exception("Agrotoxico não selecionado"),
-            CultivoId = cultivo ?? throw new Exception("Cultivo não selecionado"),
-            PragasAlvos = new List<Guid> { praga.Value },
-            Observacao = observacao,
-            DataAplicacao = data
-        };
-
-        await _adicionarAplicacaoUseCase.ExecutaAsync(aplicacao);
-
-        await DisplayAlert("Registro", $"Cultivo: {cultivo}\nPraga: {praga}\nAgrotóxico: {agrotoxico}\nObs: {observacao}\nData: {data}", "OK");
     }
 
     private async void OnVerItensClicked(object sender, EventArgs e)
