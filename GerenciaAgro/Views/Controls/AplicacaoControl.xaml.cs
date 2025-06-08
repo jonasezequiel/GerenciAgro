@@ -29,12 +29,24 @@ public partial class AplicacaoControle : ContentPage
         _visualizarCultivoUseCase = visualizarCultivoUseCase;
         _visualizarPragaUseCase = visualizarPragaUseCase;
         _visualizarAgrotoxicoUseCase = visualizarAgrotoxicoUseCase;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
 
         _ = CarregarCultivosAsync();
         _ = CarregarPragasAsync();
         _ = CarregarAgrotoxicoAsync();
     }
 
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        CultivoPicker.ClearValue(Picker.ItemsSourceProperty);
+        PragaPicker.ClearValue(Picker.ItemsSourceProperty);
+        AgrotoxicoPicker.ClearValue(Picker.ItemsSourceProperty);
+    }
 
     private async void OnRegistrarClicked(object sender, EventArgs e)
     {

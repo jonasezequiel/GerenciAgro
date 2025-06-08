@@ -53,6 +53,8 @@ namespace GerenciaAgro
             builder.Services.AddTransient<IVisualizarCultivoUseCase, VisualizarCultivoUseCase>();
             builder.Services.AddTransient<IVisualizarPragaUseCase, VisualizarPragaUseCase>();
             builder.Services.AddTransient<IVisualizarAgrotoxicoUseCase, VisualizarAgrotoxicoUseCase>();
+            builder.Services.AddTransient<IVisualizarPragaUseCase, VisualizarPragaUseCase>();
+            builder.Services.AddTransient<IAdicionarAgrotoxicoUseCase, AdicionarAgrotoxicoUseCase>();
             builder.Services.AddTransient<AplicacaoControle>();
             #endregion
             builder.Services.AddSingleton<AplicacaoPagina>();

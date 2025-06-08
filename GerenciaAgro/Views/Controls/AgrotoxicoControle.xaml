@@ -32,14 +32,26 @@
             <!-- Campo Praga Alvo -->
             <Label Text="PRAGAS ALVO" FontAttributes="Bold" TextColor="Black"/>
             <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
-                <Picker x:Name="PragaAlvoPicker" TextColor="Black" BackgroundColor="White" />
+                <CollectionView x:Name="PragaAlvoCheckList"
+                                SelectionMode="Multiple"
+                                HeightRequest="150">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="8" ColumnDefinitions="30,*">
+                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center"/>
+                                <Label Text="{Binding Nome}" Grid.Column="1" VerticalOptions="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Frame>
 
             <!-- Botão Registrar -->
             <Button Text="REGISTRAR"
                     BackgroundColor="Green"
                     TextColor="Black"
-                    CornerRadius="10" />
+                    CornerRadius="10"
+                    Clicked="OnRegistrarClicked" />
 
             <!-- Rodapé com botões -->
             <Grid ColumnDefinitions="*,*" HeightRequest="70" BackgroundColor="Green">
