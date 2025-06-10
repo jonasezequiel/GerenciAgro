@@ -52,6 +52,11 @@ public partial class AgrotoxicoControle : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(SelecaoItemCadastro));
     }
+    
+    private async void onListarItemClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(AgrotoxicoLista));
+    }
 
     private async void OnRegistrarClicked(object sender, EventArgs e)
     {

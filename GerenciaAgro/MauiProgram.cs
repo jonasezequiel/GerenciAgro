@@ -66,6 +66,7 @@ namespace GerenciaAgro
             builder.Services.AddSingleton<AgrotoxicoControle>();
             builder.Services.AddSingleton<PragaControle>();
             builder.Services.AddSingleton<CultivoControle>();
+            builder.Services.AddSingleton<AgrotoxicoLista>();
 
             //builder.Services.AddSingleton<EditarContatoPage>();
             //builder.Services.AddSingleton<AdicionarContatoPage>();
