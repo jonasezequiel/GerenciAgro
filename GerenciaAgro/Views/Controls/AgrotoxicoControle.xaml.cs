@@ -48,6 +48,11 @@ public partial class AgrotoxicoControle : ContentPage
         }
     }
 
+    private async void onRegistrarItemClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(SelecaoItemCadastro));
+    }
+
     private async void OnRegistrarClicked(object sender, EventArgs e)
     {
         var selectedPragas = _pragasWithCheckBox.Where(p => p.IsSelected).ToList();

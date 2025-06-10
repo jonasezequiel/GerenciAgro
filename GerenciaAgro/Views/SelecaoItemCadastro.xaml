@@ -36,6 +36,7 @@
                     CornerRadius="10"
                     HeightRequest="60"
                     Margin="0,10"
+                    Clicked="OnPragaClicked"
                     x:Name="PragaButton"/>
 
             <!-- Rodapé com botões -->

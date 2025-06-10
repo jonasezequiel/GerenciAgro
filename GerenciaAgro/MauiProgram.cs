@@ -21,6 +21,9 @@ namespace GerenciaAgro
     {
         public static MauiApp CreateMauiApp()
         {
+            try
+            {
+
             var builder = MauiApp.CreateBuilder();
 
             var culture = new CultureInfo("pt-BR");
@@ -49,18 +52,18 @@ namespace GerenciaAgro
             builder.Services.AddSingleton<IApagarAplicacaoUseCase, ApagarAplicacaoUseCase>();
             builder.Services.AddSingleton<IAdicionarAplicacaoUseCase, AdicionarAplicacaoUseCase>();
             builder.Services.AddSingleton<IEditarAplicacaoUseCase, EditarAplicacaoUseCase>();
-            builder.Services.AddTransient<IAdicionarAplicacaoUseCase, AdicionarAplicacaoUseCase>();
-            builder.Services.AddTransient<IVisualizarCultivoUseCase, VisualizarCultivoUseCase>();
-            builder.Services.AddTransient<IVisualizarPragaUseCase, VisualizarPragaUseCase>();
-            builder.Services.AddTransient<IVisualizarAgrotoxicoUseCase, VisualizarAgrotoxicoUseCase>();
-            builder.Services.AddTransient<IVisualizarPragaUseCase, VisualizarPragaUseCase>();
-            builder.Services.AddTransient<IAdicionarAgrotoxicoUseCase, AdicionarAgrotoxicoUseCase>();
+            builder.Services.AddSingleton<IVisualizarCultivoUseCase, VisualizarCultivoUseCase>();
+            builder.Services.AddSingleton<IVisualizarAgrotoxicoUseCase, VisualizarAgrotoxicoUseCase>();
+            builder.Services.AddSingleton<IVisualizarPragaUseCase, VisualizarPragaUseCase>();
+            builder.Services.AddSingleton<IAdicionarAgrotoxicoUseCase, AdicionarAgrotoxicoUseCase>();
+            builder.Services.AddSingleton<IAdicionarPragaUseCase, AdicionarPragaUseCase>();
             builder.Services.AddTransient<AplicacaoControle>();
             #endregion
             builder.Services.AddSingleton<AplicacaoPagina>();
             builder.Services.AddSingleton<SelecaoItemCadastro>();
             builder.Services.AddSingleton<AplicacaoControle>();
             builder.Services.AddSingleton<AgrotoxicoControle>();
+            builder.Services.AddSingleton<PragaControle>();
 
             //builder.Services.AddSingleton<EditarContatoPage>();
             //builder.Services.AddSingleton<AdicionarContatoPage>();
@@ -70,6 +73,11 @@ namespace GerenciaAgro
             SeedDatabase(app.Services);
 
             return app;
+            }catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao criar o aplicativo: {ex.Message}");
+                throw; 
+            }
         }
 
         private static async void SeedDatabase(IServiceProvider services)
