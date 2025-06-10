@@ -1,0 +1,32 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GerenciaAgro.Views.Controls.CultivoControle"
+             Title="Cadastro de Cultivo"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Image Source="logo.jpeg" HorizontalOptions="Center" HeightRequest="100"/>
+            <Label Text="CADASTRO DE CULTIVO" FontSize="24" FontAttributes="Bold" TextColor="Green" HorizontalOptions="Center" />
+
+            <Label Text="NOME" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                <Entry x:Name="NomeEntry" Placeholder="Digite o nome do cultivo" TextColor="Black" BackgroundColor="White"/>
+            </Frame>
+
+            <Button Text="REGISTRAR"
+                    BackgroundColor="Green"
+                    TextColor="Black"
+                    Clicked="OnRegistrarClicked"
+                    CornerRadius="10" />
+
+            <!-- Rodapé com botões -->
+            <Grid ColumnDefinitions="*,*" HeightRequest="70" BackgroundColor="Green">
+                <ImageButton Source="anotacao.png" BackgroundColor="Transparent" 
+                 Clicked="onRegistrarItemClicked"/>
+                <ImageButton Source="livro.png" Grid.Column="1" BackgroundColor="Transparent" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
