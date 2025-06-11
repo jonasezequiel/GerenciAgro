@@ -84,7 +84,7 @@ public partial class AplicacaoControle : ContentPage
 
     private async void OnVerItensClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync($"{nameof(AplicacaoPagina)}");
+        await Shell.Current.GoToAsync($"{nameof(AplicacaoLista)}");
     }
 
     private async void onRegistrarItemClicked(object sender, EventArgs e)

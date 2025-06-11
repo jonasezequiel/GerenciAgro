@@ -86,6 +86,9 @@
 	  <MauiXaml Update="Views\Controls\AgrotoxicoLista.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Controls\AplicacaoLista.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Controls\CultivoControle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
