@@ -102,7 +102,7 @@ namespace SqlLite
         {
             var aplicacaoExcluir = await BuscarAplicacaoPorIdAsync(aplicacao.Id);
             if (aplicacaoExcluir != null && aplicacao.Id.Equals(aplicacaoExcluir.Id))
-                await _database.DeleteAsync(aplicacaoExcluir);
+                await _database.DeleteAsync(new AplicacaoWrapper(aplicacaoExcluir));
         }
     }
 

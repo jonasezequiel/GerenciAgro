@@ -27,20 +27,22 @@
                             ItemsSource="{Binding Aplicacoes}"
                             SelectionMode="None">
                 <CollectionView.Header>
-                    <Grid ColumnDefinitions="2*,2*,2*,2*" Padding="10" BackgroundColor="#F0F0F0">
-                        <Label Text="Cultivo" FontAttributes="Bold" TextColor="Black"/>
-                        <Label Text="Praga(s)" FontAttributes="Bold" TextColor="Black" Grid.Column="1"/>
-                        <Label Text="Agrotóxico" FontAttributes="Bold" TextColor="Black" Grid.Column="2"/>
-                        <Label Text="Data" FontAttributes="Bold" TextColor="Black" Grid.Column="3"/>
+                    <Grid ColumnDefinitions="Auto,2*,2*,2*,2*" Padding="10" BackgroundColor="#F0F0F0">
+                        <Label Text="" />
+                        <Label Text="Cultivo" FontAttributes="Bold" TextColor="Black" Grid.Column="1"/>
+                        <Label Text="Praga(s)" FontAttributes="Bold" TextColor="Black" Grid.Column="2"/>
+                        <Label Text="Agrotóxico" FontAttributes="Bold" TextColor="Black" Grid.Column="3"/>
+                        <Label Text="Data" FontAttributes="Bold" TextColor="Black" Grid.Column="4"/>
                     </Grid>
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="2*,2*,2*,2*" Padding="10" RowSpacing="0" BackgroundColor="#F0F0F0">
-                            <Label Text="{Binding Cultivo}" TextColor="Black" VerticalOptions="Center"/>
-                            <Label Text="{Binding Pragas}" TextColor="Black" Grid.Column="1" VerticalOptions="Center"/>
-                            <Label Text="{Binding Agrotoxico}" TextColor="Black" Grid.Column="2" VerticalOptions="Center"/>
-                            <Label Text="{Binding DataAplicacao}" TextColor="Black" Grid.Column="3" VerticalOptions="Center"/>
+                        <Grid ColumnDefinitions="Auto,2*,2*,2*,2*" Padding="10" RowSpacing="0" BackgroundColor="#F0F0F0">
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center"/>
+                            <Label Text="{Binding Cultivo}" TextColor="Black" Grid.Column="1" VerticalOptions="Center"/>
+                            <Label Text="{Binding Pragas}" TextColor="Black" Grid.Column="2" VerticalOptions="Center"/>
+                            <Label Text="{Binding Agrotoxico}" TextColor="Black" Grid.Column="3" VerticalOptions="Center"/>
+                            <Label Text="{Binding DataAplicacao}" TextColor="Black" Grid.Column="4" VerticalOptions="Center"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -53,5 +55,22 @@
                 </CollectionView.EmptyView>
             </CollectionView>
         </Frame>
+
+        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+            <Button Text="Editar Selecionado"
+                    BackgroundColor="#2196F3"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    HeightRequest="45"
+                    Clicked="OnEditarSelecionadoClicked"/>
+            <Button Text="Excluir Selecionado"
+                    BackgroundColor="#F44336"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    HeightRequest="45"
+                    Clicked="OnExcluirSelecionadoClicked"/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
