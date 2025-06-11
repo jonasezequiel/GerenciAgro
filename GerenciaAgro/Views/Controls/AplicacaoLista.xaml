@@ -71,6 +71,12 @@
                     FontAttributes="Bold"
                     HeightRequest="45"
                     Clicked="OnExcluirSelecionadoClicked"/>
+            <Button Text="Exportar para PDF"
+                BackgroundColor="Green"
+                TextColor="White"
+                CornerRadius="10"
+                HorizontalOptions="Center"
+                Clicked="OnGerarPdfClicked" />
         </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

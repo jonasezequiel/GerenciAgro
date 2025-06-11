@@ -107,7 +107,12 @@ public partial class AplicacaoLista : ContentPage
 
     private async void OnNovaAplicacaoClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("AplicacaoControl");
+        await Shell.Current.GoToAsync($"///{nameof(AplicacaoControle)}");
+    }
+
+    private async void OnGerarPdfClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(AplicacaoPagina));
     }
 
     public class AplicacaoDto

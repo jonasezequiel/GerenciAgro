@@ -143,6 +143,11 @@ public partial class AplicacaoPagina : ContentPage
         await GerarPdfAsync();
     }
 
+    private async void OnVoltarClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(AplicacaoLista));
+    }
+
     private async Task<Cultivo> CarregarCultivoAsync(Aplicacao aplicacao)
     {
         try

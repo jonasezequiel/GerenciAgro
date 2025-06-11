@@ -36,5 +36,11 @@
                 CornerRadius="10"
                 HorizontalOptions="Center"
                 Clicked="OnGerarPdfClicked" />
+        <Button Text="Voltar"
+        BackgroundColor="Green"
+        TextColor="White"
+        CornerRadius="10"
+        HorizontalOptions="Center"
+        Clicked="OnVoltarClicked" />
     </VerticalStackLayout>
 </ContentPage>
