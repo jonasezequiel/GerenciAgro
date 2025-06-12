@@ -36,6 +36,7 @@
             <Frame x:Name="DatePickerFrame" BorderColor="Black" CornerRadius="5" Padding="0">
                 <DatePicker x:Name="DataPicker" TextColor="Black" BackgroundColor="White" />
             </Frame>
+            
 
             <!-- Botão Registrar -->
             <Button Text="REGISTRAR" 

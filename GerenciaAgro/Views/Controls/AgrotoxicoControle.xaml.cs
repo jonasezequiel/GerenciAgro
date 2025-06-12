@@ -102,6 +102,11 @@ public partial class AgrotoxicoControle : ContentPage
             await DisplayAlert("Erro", $"Erro ao registrar: {ex.Message}", "OK");
         }
     }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        LoadPragas();
+    }
 }
 
 public class PragaWithCheckBox : INotifyPropertyChanged
@@ -125,3 +130,4 @@ public class PragaWithCheckBox : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 }
+
