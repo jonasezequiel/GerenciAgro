@@ -1,6 +1,7 @@
 ﻿using CasosDeUso.PluginsInterfaces;
 using CoreBusiness.Entidades;
 using SQLite;
+using System.ComponentModel.DataAnnotations;
 
 namespace SqlLite
 {
@@ -10,8 +11,9 @@ namespace SqlLite
 
         public RepositorioAplicacaoSqlLite()
         {
+            System.Diagnostics.Debug.WriteLine($"[SQLite] Database path: {Constantes._databasepath}");
             _database = new SQLiteAsyncConnection(Constantes._databasepath);
-            _database.CreateTableAsync<Aplicacao>().Wait();
+            _database.CreateTableAsync<AplicacaoWrapper>().Wait();
         }
 
         public Task AdicionarAplicacao(Aplicacao aplicacao)
@@ -21,7 +23,8 @@ namespace SqlLite
 
         public async Task AdicionarAplicacaoAsync(Aplicacao aplicacao)
         {
-            await _database.InsertAsync(aplicacao);
+            aplicacao.Id = Guid.NewGuid();
+            await _database.InsertAsync(new AplicacaoWrapper(aplicacao));
         }
 
         public Task AtualizarAplicacao(Aplicacao aplicacao)
@@ -31,9 +34,9 @@ namespace SqlLite
 
         public async Task AtualizarAplicacaoAsync(Aplicacao aplicacao)
         {
-            var colunasAfetadas = await _database.UpdateAsync(aplicacao);
+            var colunasAfetadas = await _database.UpdateAsync(new AplicacaoWrapper(aplicacao));
             if (colunasAfetadas <= 0)
-                throw new InvalidOperationException("Erro ao atualizar contato");
+                throw new InvalidOperationException("Erro ao atualizar Aplicacao");
         }
 
         public Task<Aplicacao> BuscarAplicacaoPorId(Guid id)
@@ -43,8 +46,10 @@ namespace SqlLite
 
         public async Task<Aplicacao> BuscarAplicacaoPorIdAsync(Guid id)
         {
-            return await _database.Table<Aplicacao>()
-                .Where(x => x.Id == id).FirstOrDefaultAsync();
+            var idString = id.ToString("D");
+            var wrapper = await _database.Table<AplicacaoWrapper>()
+                .Where(x => x.Id == idString).FirstOrDefaultAsync();
+            return wrapper?.ToAplicacao();
         }
 
         public Task<List<Aplicacao>> BuscarAplicacao(string filtro)
@@ -55,12 +60,15 @@ namespace SqlLite
         public async Task<List<Aplicacao>> BuscarAplicacaoAsync(string filtro)
         {
             if (string.IsNullOrWhiteSpace(filtro))
-                return await _database.Table<Aplicacao>().ToListAsync();
+            {
+                var wrappers = await _database.Table<AplicacaoWrapper>().ToListAsync();
+                return wrappers.Select(wrapper => wrapper.ToAplicacao()).ToList();
+            }
 
-            return await this._database.QueryAsync<Aplicacao>
+            var queryResult = await this._database.QueryAsync<AplicacaoWrapper>
                 (
                     @"
-                    SELECT * FROM Aplicacao
+                    SELECT * FROM AplicacaoWrapper
                     WHERE 
                         Observacao LIKE ? OR 
                         Agrotoxico LIKE ? OR 
@@ -71,6 +79,8 @@ namespace SqlLite
                     $"{filtro}%",
                     $"{filtro}%"
                 );
+
+            return queryResult.Select(wrapper => wrapper.ToAplicacao()).ToList();
         }
 
         public Task<List<Aplicacao>> BuscarTodasAplicacao()
@@ -92,7 +102,49 @@ namespace SqlLite
         {
             var aplicacaoExcluir = await BuscarAplicacaoPorIdAsync(aplicacao.Id);
             if (aplicacaoExcluir != null && aplicacao.Id.Equals(aplicacaoExcluir.Id))
-                await _database.DeleteAsync(aplicacaoExcluir);
+                await _database.DeleteAsync(new AplicacaoWrapper(aplicacaoExcluir));
+        }
+    }
+
+    public class AplicacaoWrapper
+    {
+        [PrimaryKey]
+        public string Id { get; set; }
+        [Required]
+        public string AgrotoxicoId { get; set; }
+        [Required]
+        public string CultivoId { get; set; }
+        public string DataAplicacao { get; set; }
+        [Required]
+        public string PragasAlvos { get; set; }
+        public string? Observacao { get; set; }
+
+        public AplicacaoWrapper() { }
+
+        public AplicacaoWrapper(Aplicacao aplicacao)
+        {
+            Id = aplicacao.Id.ToString();
+            AgrotoxicoId = aplicacao.AgrotoxicoId.ToString();
+            CultivoId = aplicacao.CultivoId.ToString();
+            DataAplicacao = aplicacao.DataAplicacao.ToString();
+            PragasAlvos = string.Join(",", aplicacao.PragasAlvos.Select(g => g.ToString()));
+            Observacao = aplicacao.Observacao;
+        }
+
+
+        public Aplicacao ToAplicacao()
+        {
+            return new Aplicacao
+            {
+                Id = Guid.TryParse(Id, out var id) ? id : Guid.Empty,
+                AgrotoxicoId = Guid.TryParse(AgrotoxicoId, out var agrotoxicoId) ? agrotoxicoId : Guid.Empty,
+                CultivoId = Guid.TryParse(CultivoId, out var cultivoId) ? cultivoId : Guid.Empty,
+                DataAplicacao = DateTime.TryParse(DataAplicacao, out var dataAplicacao) ? dataAplicacao : default,
+                PragasAlvos = PragasAlvos.Split(',')
+                                          .Select(guidString => Guid.TryParse(guidString, out var guid) ? guid : Guid.Empty)
+                                          .Where(guid => guid != Guid.Empty),
+                Observacao = Observacao
+            };
         }
     }
 }

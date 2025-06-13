@@ -1,0 +1,55 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GerenciaAgro.Views.Controls.AgrotoxicoLista"
+             Title="Lista de Agrotóxicos"
+             BackgroundColor="White">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Image Source="logo.jpeg" HorizontalOptions="Center" HeightRequest="80"/>
+        <Label Text="AGROTÓXICOS CADASTRADOS"
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="Green"
+               HorizontalOptions="Center"
+               Margin="0,0,0,10"/>
+
+        <Button Text="Novo Agrotóxico"
+                BackgroundColor="Green"
+                TextColor="White"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                HeightRequest="45"
+                Clicked="OnNovoAgrotoxicoClicked"
+                Margin="0,0,0,10"/>
+
+        <Frame BorderColor="#CCCCCC" CornerRadius="10" Padding="0" HasShadow="True">
+            <CollectionView x:Name="AgrotoxicoCollectionView"
+                            ItemsSource="{Binding Agrotoxicos}"
+                            SelectionMode="None">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="2*,2*,2*" Padding="10" BackgroundColor="#F0F0F0">
+                        <Label Text="Nome" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Lote" FontAttributes="Bold" TextColor="Black" Grid.Column="1"/>
+                        <Label Text="Validade" FontAttributes="Bold" TextColor="Black" Grid.Column="2"/>
+                    </Grid>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="2*,2*,2*" Padding="10" RowSpacing="0" BackgroundColor="#F0F0F0">
+                            <Label Text="{Binding Nome}" TextColor="Black" VerticalOptions="Center"/>
+                            <Label Text="{Binding Lote}" TextColor="Black" Grid.Column="1" VerticalOptions="Center"/>
+                            <Label Text="{Binding Validade, StringFormat='{0:dd/MM/yyyy}'}" TextColor="Black" Grid.Column="2" VerticalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="Nenhum agrotóxico cadastrado."
+                           TextColor="Gray"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Padding="20"/>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </Frame>
+    </VerticalStackLayout>
+</ContentPage>

@@ -18,4 +18,14 @@ public partial class SelecaoItemCadastro : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(AgrotoxicoControle));
     }
+    
+    private async void OnPragaClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(PragaControle));
+    }
+
+    private async void OnCultivoClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(CultivoControle));
+    }
 }

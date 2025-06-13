@@ -16,85 +16,13 @@ public class Dados : IRepositorioDeAplicacao
         {
             new Aplicacao
             {
-                Agrotoxico = new Agrotoxico()
-                {
-                    Lote = "123456ABCDE",
-                    Nome = "Agrotoxico A",
-                    Validade = DateTime.Now.AddMonths(6),
-                    Id = Guid.NewGuid(),
-                    PragaAlvo = new List<Praga>()
-                    {
-                        new Praga()
-                        {
-                            Id = Guid.NewGuid(),
-                            Nome = "Pulgão"
-                        },
-                        new Praga()
-                        {
-                            Id = Guid.NewGuid(),
-                            Nome = "Lagarta"
-                        }
-                    }
-                },
-                Cultivo = new Cultivo{
-                    Nome = "Soja",
-                    Id = Guid.NewGuid()
-                },
+                AgrotoxicoId = _agrotoxico.First().Id,
+                CultivoId = _cultivos.First().Id,
                 DataAplicacao = DateTime.Now.AddDays(-10),
-                PragasAlvos = new List<Praga>()
+                PragasAlvos = new List<Guid>()
                 {
-                    new Praga()
-                    {
-                        Id = Guid.NewGuid(),
-                        Nome = "Pulgão"
-                    },
-                    new Praga()
-                    {
-                        Id = Guid.NewGuid(),
-                        Nome = "Lagarta"
-                    }
-                },
-                Observacao = "Aplicar a cada 15 dias"
-            },
-            new Aplicacao
-            {
-                Agrotoxico = new Agrotoxico()
-                {
-                    Lote = "987654TESTE",
-                    Nome = "Agrotoxico B",
-                    Validade = DateTime.Now.AddMonths(4),
-                    Id = Guid.NewGuid(),
-                    PragaAlvo = new List<Praga>()
-                    {
-                        new Praga()
-                        {
-                            Id = Guid.NewGuid(),
-                            Nome = "PRAGA 001"
-                        },
-                        new Praga()
-                        {
-                            Id = Guid.NewGuid(),
-                            Nome = "PRAGA 0002"
-                        }
-                    }
-                },
-                Cultivo = new Cultivo{
-                    Nome = "MARACUJA",
-                    Id = Guid.NewGuid()
-                },
-                DataAplicacao = DateTime.Now.AddDays(-10),
-                PragasAlvos = new List<Praga>()
-                {
-                    new Praga()
-                    {
-                        Id = Guid.NewGuid(),
-                        Nome = "PRAGA 001"
-                    },
-                    new Praga()
-                    {
-                        Id = Guid.NewGuid(),
-                        Nome = "PRAGA 002"
-                    }
+                    _pragas.First().Id,
+                    _pragas.Skip(1).First().Id
                 },
                 Observacao = "Aplicar a cada 15 dias"
             }
@@ -192,8 +120,8 @@ public class Dados : IRepositorioDeAplicacao
         var aplicacaoAtualizar = _aplicacoes.FirstOrDefault(x => x.Id == aplicacao.Id);
         if (aplicacaoAtualizar != null)
         {
-            aplicacaoAtualizar.Agrotoxico = aplicacao.Agrotoxico;
-            aplicacaoAtualizar.Cultivo = aplicacao.Cultivo;
+            aplicacaoAtualizar.AgrotoxicoId = aplicacao.AgrotoxicoId;
+            aplicacaoAtualizar.CultivoId = aplicacao.CultivoId;
             aplicacaoAtualizar.DataAplicacao = aplicacao.DataAplicacao;
             aplicacaoAtualizar.PragasAlvos = aplicacao.PragasAlvos;
             aplicacaoAtualizar.Observacao = aplicacao.Observacao;
@@ -206,8 +134,8 @@ public class Dados : IRepositorioDeAplicacao
         var aplicacaoAtualizar = _aplicacoes.FirstOrDefault(x => x.Id == aplicacao.Id);
         if (aplicacaoAtualizar != null)
         {
-            aplicacaoAtualizar.Agrotoxico = aplicacao.Agrotoxico;
-            aplicacaoAtualizar.Cultivo = aplicacao.Cultivo;
+            aplicacaoAtualizar.AgrotoxicoId = aplicacao.AgrotoxicoId;
+            aplicacaoAtualizar.CultivoId = aplicacao.CultivoId;
             aplicacaoAtualizar.DataAplicacao = aplicacao.DataAplicacao;
             aplicacaoAtualizar.PragasAlvos = aplicacao.PragasAlvos;
             aplicacaoAtualizar.Observacao = aplicacao.Observacao;
@@ -221,11 +149,27 @@ public class Dados : IRepositorioDeAplicacao
         {
             return Task.FromResult(_aplicacoes);
         }
-        var aplicacaoPraga = _aplicacoes.Where(app => app.PragasAlvos.Any(p => p.Nome.Contains(filtro, StringComparison.OrdinalIgnoreCase))).ToList();
-        var aplicacaoAgrotoxico = _aplicacoes.Where(app => app.Agrotoxico.Nome.Contains(filtro, StringComparison.OrdinalIgnoreCase)).ToList();
-        var aplicacaoCultivo = _aplicacoes.Where(app => app.Cultivo.Nome.Contains(filtro, StringComparison.OrdinalIgnoreCase)).ToList();
 
-        return Task.FromResult(aplicacaoPraga.Union(aplicacaoCultivo).Union(aplicacaoCultivo).ToList());
+        var aplicacaoPragaIds = _pragas
+            .Where(praga => praga.Nome.Contains(filtro, StringComparison.OrdinalIgnoreCase))
+            .Select(praga => praga.Id);
+
+        var aplicacaoAgrotoxicoIds = _agrotoxico
+            .Where(agrotoxico => agrotoxico.Nome.Contains(filtro, StringComparison.OrdinalIgnoreCase))
+            .Select(agrotoxico => agrotoxico.Id);
+
+        var aplicacaoCultivoIds = _cultivos
+            .Where(cultivo => cultivo.Nome.Contains(filtro, StringComparison.OrdinalIgnoreCase))
+            .Select(cultivo => cultivo.Id);
+
+        var filteredAplicacoes = _aplicacoes
+            .Where(aplicacao =>
+                aplicacao.PragasAlvos.Any(pragaId => aplicacaoPragaIds.Contains(pragaId)) ||
+                aplicacaoAgrotoxicoIds.Contains(aplicacao.AgrotoxicoId) ||
+                aplicacaoCultivoIds.Contains(aplicacao.CultivoId))
+            .ToList();
+
+        return Task.FromResult(filteredAplicacoes);
     }
 
     public Task<Aplicacao> BuscarAplicacaoPorId(Guid id)
