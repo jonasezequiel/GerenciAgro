@@ -1,5 +1,5 @@
-﻿using CasosDeUso.AplicacaoUseCase;
-using CasosDeUso.Interface.IAgrotoxicoUseCase;
+﻿using CasosDeUso;
+using CasosDeUso.Interface;
 using CasosDeUso.PluginsInterfaces;
 using DadosEmMemoria;
 using GerenciaAgro.Views;
@@ -35,8 +35,8 @@ namespace GerenciaAgro
             //builder.Services.AddSingleton<IRepositorioDeContatos, RepositorioContatosSqlLite>();
             builder.Services.AddSingleton<IRepositorioDeAplicacao, DadosEmMemoria.Dados>();
             builder.Services.AddSingleton<IVisualizarAplicacaoUseCase, VisualizarAplicacaoUseCase>();
-            builder.Services.AddSingleton<IApagarAplicacaoUseCase, ApagarPragaUseCase>();
-            builder.Services.AddSingleton<IAdicionarAplicacaoUseCase, AdicionarPragaUseCase>();
+            builder.Services.AddSingleton<IApagarAplicacaoUseCase, ApagarAplicacaoUseCase>();
+            builder.Services.AddSingleton<IAdicionarAplicacaoUseCase, AdicionarAplicacaoUseCase>();
             builder.Services.AddSingleton<IEditarAplicacaoUseCase, EditarAplicacaoUseCase>();
             builder.Services.AddTransient<AplicacaoControle>();
             #endregion

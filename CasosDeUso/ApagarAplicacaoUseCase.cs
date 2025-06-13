@@ -1,8 +1,8 @@
-﻿using CasosDeUso.Interface.IAplicacaoUseCase;
-using CasosDeUso.PluginsInterface;
+﻿using CasosDeUso.Interface;
+using CasosDeUso.PluginsInterfaces;
 using CoreBusiness.Entidades;
 
-namespace CasosDeUso.AplicacaoUseCase;
+namespace CasosDeUso;
 
 public class ApagarAplicacaoUseCase : IApagarAplicacaoUseCase
 {

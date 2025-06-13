@@ -1,6 +1,6 @@
 ﻿using CoreBusiness.Entidades;
 
-namespace CasosDeUso.Interface.IAplicacaoUseCase;
+namespace CasosDeUso.Interface;
 
 public interface IVisualizarAplicacaoUseCase
 {

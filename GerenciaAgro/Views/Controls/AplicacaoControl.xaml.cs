@@ -1,6 +1,6 @@
 namespace GerenciaAgro.Views.Controls;
 
-using CasosDeUso.Interface.IAgrotoxicoUseCase;
+using CasosDeUso.Interface;
 using CoreBusiness.Entidades;
 using Microsoft.Maui.Controls;
 

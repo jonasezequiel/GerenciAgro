@@ -1,8 +1,8 @@
-﻿using CasosDeUso.Interface.IAgrotoxicoUseCase;
+﻿using CasosDeUso.Interface;
 using CasosDeUso.PluginsInterfaces;
 using CoreBusiness.Entidades;
 
-namespace CasosDeUso.AplicacaoUseCase;
+namespace CasosDeUso;
 
 public class VisualizarAplicacaoUseCase : IVisualizarAplicacaoUseCase
 {
