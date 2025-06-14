@@ -6,9 +6,9 @@ namespace CasosDeUso.CultivoCasoDeUso
 {
     public class ApagarCultivoUseCase : IApagarCultivoUseCase
     {
-        private readonly IRepositorioDeCultivo _cultivoRepository;
+        private readonly IRepositorioDeAplicacao _cultivoRepository;
 
-        public ApagarCultivoUseCase(IRepositorioDeCultivo repositorioDeCultivo)
+        public ApagarCultivoUseCase(IRepositorioDeAplicacao repositorioDeCultivo)
         {
             _cultivoRepository = repositorioDeCultivo ?? throw new ArgumentNullException(nameof(repositorioDeCultivo));
         }

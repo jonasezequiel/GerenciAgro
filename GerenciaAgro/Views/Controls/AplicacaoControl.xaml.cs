@@ -35,9 +35,9 @@ public partial class AplicacaoControle : ContentPage
     {
         base.OnAppearing();
 
-        _ = CarregarCultivosAsync();
-        _ = CarregarPragasAsync();
-        _ = CarregarAgrotoxicoAsync();
+        await CarregarCultivosAsync();
+        await CarregarPragasAsync();
+        await CarregarAgrotoxicoAsync();
     }
 
     protected override void OnDisappearing()

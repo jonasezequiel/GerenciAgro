@@ -6,9 +6,9 @@ namespace CasosDeUso.AgrotoxicoCasoDeUso
 {
     public class ApagarAgrotoxicoUseCase : IApagarAgrotoxicoUseCase
     {
-        private readonly IRepositorioDeAgrotoxico _agrotoxicoRepository;
+        private readonly IRepositorioDeAplicacao _agrotoxicoRepository;
 
-        public ApagarAgrotoxicoUseCase(IRepositorioDeAgrotoxico repositorioDeAgrotoxico)
+        public ApagarAgrotoxicoUseCase(IRepositorioDeAplicacao repositorioDeAgrotoxico)
         {
             _agrotoxicoRepository = repositorioDeAgrotoxico ?? throw new ArgumentNullException(nameof(repositorioDeAgrotoxico));
         }

@@ -6,8 +6,8 @@ namespace CasosDeUso.CultivoCasoDeUso
 {
     public class EditarCultivoUseCase : IEditarCultivoUseCase
     {
-        private readonly IRepositorioDeCultivo _cultivoRepository;
-        public EditarCultivoUseCase(IRepositorioDeCultivo repositorioDeCultivo)
+        private readonly IRepositorioDeAplicacao _cultivoRepository;
+        public EditarCultivoUseCase(IRepositorioDeAplicacao repositorioDeCultivo)
         {
             _cultivoRepository = repositorioDeCultivo ?? throw new ArgumentNullException(nameof(repositorioDeCultivo));
         }
