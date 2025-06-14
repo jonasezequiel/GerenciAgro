@@ -51,6 +51,7 @@ namespace GerenciaAgro
                 builder.Services.AddSingleton<IAdicionarAgrotoxicoUseCase, AdicionarAgrotoxicoUseCase>();
                 builder.Services.AddSingleton<IAdicionarPragaUseCase, AdicionarPragaUseCase>();
                 builder.Services.AddSingleton<IAdicionarCultivoUseCase, AdicionarCultivoUseCase>();
+                builder.Services.AddSingleton<IEditarAgrotoxicoUseCase, EditarAgrotoxicoUseCase>();
                 builder.Services.AddTransient<AplicacaoControle>();
                 #endregion
                 builder.Services.AddSingleton<AplicacaoPagina>();

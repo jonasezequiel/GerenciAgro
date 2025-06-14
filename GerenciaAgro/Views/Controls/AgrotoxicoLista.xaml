@@ -25,20 +25,34 @@
         <Frame BorderColor="#CCCCCC" CornerRadius="10" Padding="0" HasShadow="True">
             <CollectionView x:Name="AgrotoxicoCollectionView"
                             ItemsSource="{Binding Agrotoxicos}"
-                            SelectionMode="None">
+                            SelectionMode="Multiple"
+                            SelectionChanged="AgrotoxicoCollectionView_SelectionChanged">
                 <CollectionView.Header>
-                    <Grid ColumnDefinitions="2*,2*,2*" Padding="10" BackgroundColor="#F0F0F0">
+                    <Grid ColumnDefinitions="2*,2*,2*,2*" Padding="10" BackgroundColor="#F0F0F0">
                         <Label Text="Nome" FontAttributes="Bold" TextColor="Black"/>
                         <Label Text="Lote" FontAttributes="Bold" TextColor="Black" Grid.Column="1"/>
-                        <Label Text="Validade" FontAttributes="Bold" TextColor="Black" Grid.Column="2"/>
+                        <Label Text="Status" FontAttributes="Bold" TextColor="Black" Grid.Column="2"/>
+                        <Label Text="Validade" FontAttributes="Bold" TextColor="Black" Grid.Column="3"/>
+                        <Label Text="" Grid.Column="3"/>
                     </Grid>
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="2*,2*,2*" Padding="10" RowSpacing="0" BackgroundColor="#F0F0F0">
+                        <Grid ColumnDefinitions="2*,2*,2*,2*" Padding="10" RowSpacing="0" BackgroundColor="#F0F0F0">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal"/>
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#C8E6C9"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
                             <Label Text="{Binding Nome}" TextColor="Black" VerticalOptions="Center"/>
                             <Label Text="{Binding Lote}" TextColor="Black" Grid.Column="1" VerticalOptions="Center"/>
-                            <Label Text="{Binding Validade, StringFormat='{0:dd/MM/yyyy}'}" TextColor="Black" Grid.Column="2" VerticalOptions="Center"/>
+                            <Label Text="{Binding Status}" TextColor="Black" Grid.Column="2" VerticalOptions="Center"/>
+                            <Label Text="{Binding Validade, StringFormat='{0:dd/MM/yyyy}'}" TextColor="Black" Grid.Column="3" VerticalOptions="Center"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -51,5 +65,14 @@
                 </CollectionView.EmptyView>
             </CollectionView>
         </Frame>
+        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+            <Button Text="Editar Selecionado"
+            BackgroundColor="#2196F3"
+            TextColor="White"
+            CornerRadius="10"
+            FontAttributes="Bold"
+            HeightRequest="45"
+            Clicked="OnEditarSelecionadoClicked"/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

@@ -1,8 +1,9 @@
-using System.Collections.ObjectModel;
 using CasosDeUso.Interface.InterfaceAgrotoxicoUseCase;
+using CasosDeUso.Interface.InterfaceAplicacaoUseCase;
 using CasosDeUso.Interface.InterfacePragaUseCase;
 using CoreBusiness.Entidades;
-using Microsoft.Maui.Controls;
+using Microsoft.Extensions.Logging.Abstractions;
+using System.Collections.ObjectModel;
 
 namespace GerenciaAgro.Views.Controls
 {
@@ -11,20 +12,35 @@ namespace GerenciaAgro.Views.Controls
         public ObservableCollection<AgrotoxicDto> Agrotoxicos { get; set; }
         IVisualizarAgrotoxicoUseCase _visualizarAgrotoxicoUseCase;
         IVisualizarPragaUseCase _visualizarPragaUseCase;
+        IEditarAgrotoxicoUseCase _editarAgrotoxicoUseCase;
 
         public AgrotoxicoLista(IVisualizarAgrotoxicoUseCase visualizarAgrotoxicoUseCase,
-                               IVisualizarPragaUseCase visualizarPragaUseCase)
+                               IVisualizarPragaUseCase visualizarPragaUseCase,
+                               IEditarAgrotoxicoUseCase editarAgrotoxicoUseCase)
         {
             InitializeComponent();
 
             _visualizarAgrotoxicoUseCase = visualizarAgrotoxicoUseCase;
             _visualizarPragaUseCase = visualizarPragaUseCase;
+            _editarAgrotoxicoUseCase = editarAgrotoxicoUseCase;
+
             Agrotoxicos = new ObservableCollection<AgrotoxicDto>();
             BindingContext = this;
-            CarregarAgrotoxicos();
         }
 
-        private async void CarregarAgrotoxicos()
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await CarregarAgrotoxicos();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            Agrotoxicos.Clear();
+        }
+
+        private async Task CarregarAgrotoxicos()
         {
             var agrotoxicoList = await _visualizarAgrotoxicoUseCase.ExecutaListAsync("");
 
@@ -32,9 +48,11 @@ namespace GerenciaAgro.Views.Controls
             {
                 Agrotoxicos.Add(new AgrotoxicDto
                 {
+                    Id = agrotoxico.Id,
                     Nome = agrotoxico.Nome,
                     Lote = agrotoxico.Lote,
                     Validade = agrotoxico.Validade,
+                    Status = agrotoxico.Inativo ? "Inativo" : "Ativo",
                     PragaAlvo = agrotoxico.PragaAlvo != null
                                 ? string.Join(", ", agrotoxico.PragaAlvo.Select(p => p.Nome))
                                 : string.Empty
@@ -46,13 +64,44 @@ namespace GerenciaAgro.Views.Controls
         {
             await Shell.Current.GoToAsync("AgrotoxicoControle");
         }
+
+        private void AgrotoxicoCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Limpa seleção anterior
+            foreach (var item in Agrotoxicos)
+                item.IsSelected = false;
+
+            // Marca os itens atualmente selecionados
+            foreach (var selecionado in e.CurrentSelection)
+            {
+                if (selecionado is AgrotoxicDto dto)
+                    dto.IsSelected = true;
+            }
+        }
+
+        private async void OnEditarSelecionadoClicked(object sender, EventArgs e)
+        {
+            var selecionado = Agrotoxicos.FirstOrDefault(a => a.IsSelected);
+
+            if (selecionado != null)
+            {
+                await Shell.Current.GoToAsync($"{nameof(AgrotoxicoControle)}?id={selecionado.Id}");
+            }
+            else
+            {
+                await DisplayAlert("Atenção", "Selecione uma aplicação para editar.", "OK");
+            }
+        }
     }
 
     public class AgrotoxicDto
     {
+        public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Lote { get; set; }
         public DateTimeOffset Validade { get; set; }
         public string PragaAlvo { get; set; }
+        public bool IsSelected { get; set; }
+        public string Status { get; set; }
     }
 }

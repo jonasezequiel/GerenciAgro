@@ -191,7 +191,7 @@ namespace SqlLite
             var agrotoxicoExcluir = await BuscarAgrotoxicoPorIdAsync(agrotoxico.Id);
 
             if (agrotoxicoExcluir != null && agrotoxico.Id.Equals(agrotoxicoExcluir.Id))
-                await _database.DeleteAsync(AdicionarAgrotoxicoAsync(agrotoxicoExcluir));
+                await _database.DeleteAsync(new AgrotoxicoWrapper(agrotoxicoExcluir));
         }
         #endregion
 
@@ -403,10 +403,12 @@ namespace SqlLite
 
     public class AgrotoxicoWrapper
     {
+        [PrimaryKey]
         public string Id { get; set; }
         public string Nome { get; set; }
         public string Lote { get; set; }
         public string Validade { get; set; }
+        public int Inativo { get; set; } = 0; // 0 for false, 1 for true
 
         public AgrotoxicoWrapper() { }
 
@@ -416,6 +418,7 @@ namespace SqlLite
             Nome = agrotoxico.Nome;
             Lote = agrotoxico.Lote;
             Validade = agrotoxico.Validade.ToString();
+            Inativo = agrotoxico.Inativo ? 1 : 0; // Convert boolean to int
         }
 
         public Agrotoxico ToAgrotoxico()
@@ -425,7 +428,8 @@ namespace SqlLite
                 Id = Guid.TryParse(Id, out var guid) ? guid : Guid.Empty,
                 Nome = Nome,
                 Lote = Lote,
-                Validade = DateTime.TryParse(Validade, out var validade) ? validade : default
+                Validade = DateTime.TryParse(Validade, out var validade) ? validade : default,
+                Inativo = Inativo == 1, // Convert int back to boolean
             };
         }
     }

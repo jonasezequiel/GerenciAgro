@@ -105,7 +105,6 @@ public partial class AplicacaoLista : ContentPage
             var aplicacao = await _aplicacaoUseCase.ExecutaAsync(dto.Id);
             if (aplicacao != null)
             {
-                // Implemente a lógica de exclusão conforme sua interface
                 await _apagarAplicacaoUseCase.ExecutaAsync(aplicacao);
             }
         }

@@ -24,6 +24,7 @@ namespace CasosDeUso.AgrotoxicoCasoDeUso
             agrotoxicoSelecinado.PragaAlvo = agrotoxico.PragaAlvo;
             agrotoxicoSelecinado.Nome = agrotoxico.Nome;
             agrotoxicoSelecinado.Validade = agrotoxico.Validade;
+            agrotoxicoSelecinado.Inativo = agrotoxico.Inativo;
             await _agrotoxicoRepository.AtualizarAgrotoxicoAsync(agrotoxicoSelecinado);
         }
     }

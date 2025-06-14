@@ -143,7 +143,7 @@ public partial class AplicacaoControle : ContentPage, IQueryAttributable
         try
         {
             var agrotoxicos = await _visualizarAgrotoxicoUseCase.ExecutaListAsync("");
-            AgrotoxicoPicker.ItemsSource = agrotoxicos.ToList();
+            AgrotoxicoPicker.ItemsSource = agrotoxicos.Where(a => a.Inativo == false).ToList();
         }
         catch (Exception ex)
         {
