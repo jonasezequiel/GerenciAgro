@@ -14,7 +14,7 @@
             <!-- Campos ComboBox -->
             <Label Text="CULTIVO" FontAttributes="Bold" TextColor="Black"/>
             <Frame BorderColor="Black" CornerRadius="5" Padding="0">
-                <Picker x:Name="CultivoPicker" TextColor="Black" BackgroundColor="White" />
+                <Picker x:Name="CultivoPicker" TextColor="Black" BackgroundColor="White" ItemDisplayBinding="{Binding Nome}"/>
             </Frame>
 
             <Label Text="PRAGA" FontAttributes="Bold" TextColor="Black"/>

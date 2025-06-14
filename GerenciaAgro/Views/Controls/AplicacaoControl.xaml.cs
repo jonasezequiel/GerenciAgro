@@ -6,22 +6,28 @@ using CasosDeUso.Interface.InterfaceCultivoUseCase;
 using CasosDeUso.Interface.InterfacePragaUseCase;
 using CoreBusiness.Entidades;
 using Microsoft.Maui.Controls;
+using System.Collections.Generic;
+using System.Diagnostics;
 
-public partial class AplicacaoControle : ContentPage
+public partial class AplicacaoControle : ContentPage, IQueryAttributable
 {
     private readonly IAdicionarAplicacaoUseCase _adicionarAplicacaoUseCase;
+    private readonly IEditarAplicacaoUseCase _editarAplicacaoUseCase;
     private readonly IVisualizarCultivoUseCase _visualizarCultivoUseCase;
     private readonly IVisualizarPragaUseCase _visualizarPragaUseCase;
     private readonly IVisualizarAgrotoxicoUseCase _visualizarAgrotoxicoUseCase;
+    private readonly IVisualizarAplicacaoUseCase _visualizarAplicacaoUseCase;
 
-
+    bool isEditing = false;
     public DateTime SelectedDate { get; set; } = DateTime.Today;
 
     public AplicacaoControle(
     IAdicionarAplicacaoUseCase adicionarAplicacaoUseCase,
     IVisualizarCultivoUseCase visualizarCultivoUseCase,
     IVisualizarPragaUseCase visualizarPragaUseCase,
-    IVisualizarAgrotoxicoUseCase visualizarAgrotoxicoUseCase)
+    IVisualizarAgrotoxicoUseCase visualizarAgrotoxicoUseCase,
+    IVisualizarAplicacaoUseCase visualizarAplicacaoUseCase,
+    IEditarAplicacaoUseCase editarAplicacaoUseCase)
     {
         InitializeComponent();
 
@@ -29,6 +35,8 @@ public partial class AplicacaoControle : ContentPage
         _visualizarCultivoUseCase = visualizarCultivoUseCase;
         _visualizarPragaUseCase = visualizarPragaUseCase;
         _visualizarAgrotoxicoUseCase = visualizarAgrotoxicoUseCase;
+        _visualizarAplicacaoUseCase = visualizarAplicacaoUseCase;
+        _editarAplicacaoUseCase = editarAplicacaoUseCase;
     }
 
     protected override async void OnAppearing()
@@ -72,6 +80,18 @@ public partial class AplicacaoControle : ContentPage
                 DataAplicacao = data
             };
 
+            if (isEditing)
+            {
+                var aplicacaoId = (Guid)BindingContext;
+                aplicacao.Id = aplicacaoId;
+                await _editarAplicacaoUseCase.ExecutaAsync(aplicacao);
+                await DisplayAlert("Edição", $"Cultivo: {cultivo}\nPraga: {praga}\nAgrotóxico: {agrotoxico}\nObs: {observacao}\nData: {data}", "OK");
+                return;
+            }
+            else
+            {
+                aplicacao.Id = Guid.NewGuid(); // Gera um novo ID para a nova aplicação
+            }
             await _adicionarAplicacaoUseCase.ExecutaAsync(aplicacao);
 
             await DisplayAlert("Registro", $"Cultivo: {cultivo}\nPraga: {praga}\nAgrotóxico: {agrotoxico}\nObs: {observacao}\nData: {data}", "OK");
@@ -128,6 +148,42 @@ public partial class AplicacaoControle : ContentPage
         catch (Exception ex)
         {
             await DisplayAlert("Erro", $"Não foi possível carregar os agrotoxicos: {ex.Message}", "OK");
+        }
+    }
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.TryGetValue("id", out var aplicacaoObj) && aplicacaoObj is string aplicacaoId)
+        {
+            isEditing = true;
+            try
+            {
+                BindingContext = Guid.Parse(aplicacaoId);
+                var id = Guid.Parse(aplicacaoId);
+                CarregarAplicacaoAsync(id).ConfigureAwait(false);
+            }
+            catch (FormatException)
+            {
+                Debug.WriteLine("ID de aplicação inválido: " + aplicacaoId);
+            }
+        }
+    }
+
+    private async Task CarregarAplicacaoAsync(Guid aplicacaoid)
+    {
+        try
+        {
+            var aplicacao = await _visualizarAplicacaoUseCase.ExecutaAsync(aplicacaoid);
+            await CarregarCultivosAsync();
+            await CarregarPragasAsync();
+            await CarregarAgrotoxicoAsync();
+            CultivoPicker.SelectedIndex = CultivoPicker.ItemsSource.Cast<Cultivo>().ToList().FindIndex(c => c.Id == aplicacao.CultivoId);
+            PragaPicker.SelectedIndex = PragaPicker.ItemsSource.Cast<Praga>().ToList().FindIndex(p => aplicacao.PragasAlvos.Contains(p.Id));
+            AgrotoxicoPicker.SelectedIndex = AgrotoxicoPicker.ItemsSource.Cast<Agrotoxico>().ToList().FindIndex(a => a.Id == aplicacao.AgrotoxicoId);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", $"Não foi possível carregar as pragas: {ex.Message}", "OK");
         }
     }
 }

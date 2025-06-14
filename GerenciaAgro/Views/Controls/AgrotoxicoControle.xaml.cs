@@ -72,11 +72,6 @@ public partial class AgrotoxicoControle : ContentPage
             await DisplayAlert("Erro", "O lote é obrigatório.", "OK");
             return;
         }
-        if (!selectedPragas.Any())
-        {
-            await DisplayAlert("Erro", "Selecione pelo menos uma praga alvo.", "OK");
-            return;
-        }
 
         var pragasAlvo = selectedPragas.Select(p => new Praga { Id = p.Id, Nome = p.Nome }).ToList();
         var nome = NomeEntry.Text;
