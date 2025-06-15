@@ -1,7 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GerenciaAgro.Views.Controls.CultivoLista"
-             Title="Lista de Cultivos"
              BackgroundColor="White">
     <VerticalStackLayout Padding="20" Spacing="20">
         <Image Source="logo.jpeg" HorizontalOptions="Center" HeightRequest="80"/>
@@ -25,38 +24,23 @@
             <CollectionView x:Name="CultivoCollectionView"
                             ItemsSource="{Binding Cultivos}"
                             SelectionMode="None"
-                            SelectionChanged="CultivoCollectionView_SelectionChanged" Background="white">
+                            Background="#F0F0F0">
                 <CollectionView.Header>
-                    <Grid ColumnDefinitions="2*,2*" Padding="10" BackgroundColor="#F0F0F0">
-                        <Label Text="Nome" FontAttributes="Bold" TextColor="Black"/>
-                        <Label Text="Status" FontAttributes="Bold" TextColor="Black" Grid.Column="1"/>
+                    <Grid ColumnDefinitions="Auto,2*,2*" Padding="10" BackgroundColor="#F0F0F0">
+                        <Label Text="" HeightRequest="32" WidthRequest="42" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Label Text="Nome" FontAttributes="Bold" TextColor="Black" Grid.Column="1"/>
+                        <Label Text="Status" FontAttributes="Bold" TextColor="Black" Grid.Column="2"/>
                     </Grid>
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="2*,2*" Padding="10" RowSpacing="0" BackgroundColor="#F0F0F0">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal"/>
-                                    <VisualState Name="Selected">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#C8E6C9"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Label Text="{Binding Nome}" TextColor="Black" VerticalOptions="Center"/>
-                            <Label Text="{Binding Status}" TextColor="Black" Grid.Column="1" VerticalOptions="Center"/>
+                        <Grid ColumnDefinitions="Auto,2*,2*" Padding="10" RowSpacing="0" BackgroundColor="#F0F0F0">
+                            <CheckBox Color="Green" IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center"/>
+                            <Label Text="{Binding Nome}" TextColor="Black" VerticalOptions="Center" Grid.Column="1"/>
+                            <Label Text="{Binding Status}" TextColor="Black" Grid.Column="2" VerticalOptions="Center"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-                <CollectionView.EmptyView>
-                    <Label Text="Nenhum cultivo cadastrado."
-                           TextColor="Gray"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           Padding="20"/>
-                </CollectionView.EmptyView>
             </CollectionView>
         </Frame>
         <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">

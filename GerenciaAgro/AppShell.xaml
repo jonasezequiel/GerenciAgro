@@ -6,7 +6,7 @@
    xmlns:local="clr-namespace:GerenciaAgro"  
    xmlns:views="clr-namespace:GerenciaAgro.Views.Controls"  
    Shell.FlyoutBehavior="Disabled"  
-   Title="GerenciAgro">  
+   Title="">  
 
    <ShellContent  
        Title="Home"  
