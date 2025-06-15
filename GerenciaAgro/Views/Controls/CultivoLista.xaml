@@ -24,7 +24,7 @@
         <Frame BorderColor="#CCCCCC" CornerRadius="10" Padding="0" HasShadow="True">
             <CollectionView x:Name="CultivoCollectionView"
                             ItemsSource="{Binding Cultivos}"
-                            SelectionMode="Multiple"
+                            SelectionMode="None"
                             SelectionChanged="CultivoCollectionView_SelectionChanged" Background="white">
                 <CollectionView.Header>
                     <Grid ColumnDefinitions="2*,2*" Padding="10" BackgroundColor="#F0F0F0">
