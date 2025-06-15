@@ -3,7 +3,6 @@
              x:Class="GerenciaAgro.Views.Controls.CultivoLista"
              Title="Lista de Cultivos"
              BackgroundColor="White">
-
     <VerticalStackLayout Padding="20" Spacing="20">
         <Image Source="logo.jpeg" HorizontalOptions="Center" HeightRequest="80"/>
         <Label Text="CULTIVOS CADASTRADOS"

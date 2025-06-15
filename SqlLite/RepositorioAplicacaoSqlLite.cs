@@ -409,6 +409,12 @@ namespace SqlLite
         public string Lote { get; set; }
         public string Validade { get; set; }
         public int Inativo { get; set; } = 0; // 0 for false, 1 for true
+        public string Dose { get; set; }
+        public string Calda { get; set; }
+        public int IntervaloSeguranca { get; set; }
+        public int AgrotóxicoControlado { get; set; } = 1;// 0 for false, 1 for true
+        public string HectaresAplicacao { get; set; }
+        public int QuantidadeAplicacoes { get; set; }
 
         public AgrotoxicoWrapper() { }
 
@@ -419,6 +425,12 @@ namespace SqlLite
             Lote = agrotoxico.Lote;
             Validade = agrotoxico.Validade.ToString();
             Inativo = agrotoxico.Inativo ? 1 : 0; // Convert boolean to int
+            Dose = agrotoxico.Dose;
+            Calda = agrotoxico.Calda;
+            IntervaloSeguranca = agrotoxico.IntervaloSeguranca;
+            AgrotóxicoControlado = agrotoxico.AgrotóxicoControlado ? 1 : 0;
+            HectaresAplicacao = agrotoxico.HectaresAplicacao;
+            QuantidadeAplicacoes = agrotoxico.QuantidadeAplicacoes;
         }
 
         public Agrotoxico ToAgrotoxico()
@@ -430,6 +442,12 @@ namespace SqlLite
                 Lote = Lote,
                 Validade = DateTime.TryParse(Validade, out var validade) ? validade : default,
                 Inativo = Inativo == 1, // Convert int back to boolean
+                Dose = Dose,
+                Calda = Calda,
+                IntervaloSeguranca = IntervaloSeguranca,
+                AgrotóxicoControlado = AgrotóxicoControlado == 1,
+                HectaresAplicacao = HectaresAplicacao,
+                QuantidadeAplicacoes = QuantidadeAplicacoes,
             };
         }
     }

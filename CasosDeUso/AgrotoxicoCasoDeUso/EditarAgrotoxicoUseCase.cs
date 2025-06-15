@@ -25,6 +25,12 @@ namespace CasosDeUso.AgrotoxicoCasoDeUso
             agrotoxicoSelecinado.Nome = agrotoxico.Nome;
             agrotoxicoSelecinado.Validade = agrotoxico.Validade;
             agrotoxicoSelecinado.Inativo = agrotoxico.Inativo;
+            agrotoxicoSelecinado.IntervaloSeguranca = agrotoxico.IntervaloSeguranca;
+            agrotoxicoSelecinado.Calda = agrotoxico.Calda;
+            agrotoxicoSelecinado.HectaresAplicacao = agrotoxico.HectaresAplicacao;
+            agrotoxicoSelecinado.QuantidadeAplicacoes = agrotoxico.QuantidadeAplicacoes;
+            agrotoxicoSelecinado.AgrotóxicoControlado = agrotoxico.AgrotóxicoControlado;
+            agrotoxicoSelecinado.Dose = agrotoxico.Dose;
             await _agrotoxicoRepository.AtualizarAgrotoxicoAsync(agrotoxicoSelecinado);
         }
     }

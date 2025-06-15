@@ -96,6 +96,12 @@ public partial class AgrotoxicoControle : ContentPage, IQueryAttributable
         var lote = LoteEntry.Text;
         var dataValidade = ValidadePicker.Date;
         var inativo = InativoCheckBox.IsChecked;
+        var dose = DoseEntry.Text;
+        var calda = CaldaEntry.Text;
+        var intervaloSeguranca = int.TryParse(IntervaloSegurancaEntry.Text, out var parsedIntervalo) ? parsedIntervalo : 0;
+        var controlado = ControladoCheckBox.IsChecked;
+        var qtdAplicacao = int.TryParse(QuantidadedAplicacaoEntry.Text, out var parsedQuantidaded) ? parsedQuantidaded : 0;
+        var hectaresAplicacao = HectaresAplicacaoEntry.Text;
 
         var agrotoxico = new Agrotoxico
         {
@@ -104,17 +110,24 @@ public partial class AgrotoxicoControle : ContentPage, IQueryAttributable
             Nome = nome,
             Validade = dataValidade,
             PragaAlvo = pragasAlvo,
-            Inativo = inativo
+            Inativo = inativo,
+            IntervaloSeguranca = intervaloSeguranca,
+            QuantidadeAplicacoes = qtdAplicacao,
+            HectaresAplicacao = hectaresAplicacao,
+            AgrotóxicoControlado = controlado,
+            Calda = calda,
+            Dose = dose,
         };
 
         try
         {
-            if(isEditing)
+            if (isEditing)
             {
                 var agrotoxicoId = (Guid)BindingContext;
                 agrotoxico.Id = agrotoxicoId;
                 await _editarAgrotoxicoUseCase.ExecutaAsync(agrotoxico);
                 await DisplayAlert("Edição", "Agrotóxico editado com sucesso!", "OK");
+                isEditing = false;
                 return;
             }
             await _adicionarAgrotoxicoUseCase.ExecutaAsync(agrotoxico);
@@ -165,6 +178,20 @@ public partial class AgrotoxicoControle : ContentPage, IQueryAttributable
         {
             await DisplayAlert("Erro", $"Não foi possível carregar as pragas: {ex.Message}", "OK");
         }
+    }
+
+    public async Task LimparCapos()
+    {
+        NomeEntry.ClearValue(Entry.TextProperty);
+        LoteEntry.ClearValue(Entry.TextProperty);
+        ValidadePicker.ClearValue(DatePicker.DateProperty);
+        InativoCheckBox.ClearValue(CheckBox.IsCheckedProperty);
+        DoseEntry.ClearValue(Entry.TextProperty);
+        CaldaEntry.ClearValue(Entry.TextProperty);
+        IntervaloSegurancaEntry.ClearValue(Entry.TextProperty);
+        ControladoCheckBox.ClearValue(CheckBox.IsCheckedProperty);
+        QuantidadedAplicacaoEntry.ClearValue(Entry.TextProperty);
+        HectaresAplicacaoEntry.ClearValue(Entry.TextProperty);
     }
 }
 
