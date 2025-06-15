@@ -78,7 +78,7 @@
                           VerticalOptions="Center"
                           Color="Green"
                           BackgroundColor="Transparent"/>
-                                    <Label Text="{Binding Nome}" VerticalOptions="Center"/>
+                                    <Label Text="{Binding Nome}" VerticalOptions="Center" TextColor="Black"/>
                                 </HorizontalStackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
