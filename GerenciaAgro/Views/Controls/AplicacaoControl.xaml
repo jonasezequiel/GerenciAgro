@@ -18,24 +18,25 @@
             </Frame>
 
             <Label Text="PRAGA" FontAttributes="Bold" TextColor="Black"/>
-            <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
+            <Frame BorderColor="Black" CornerRadius="5" Padding="0">
                 <Picker x:Name="PragaPicker" TextColor="Black" BackgroundColor="White" ItemDisplayBinding="{Binding Nome}"/>
             </Frame>
 
             <Label Text="AGROTÓXICO" FontAttributes="Bold" TextColor="Black"/>
-            <Frame BorderColor="Gray" CornerRadius="1" Padding="0">
+            <Frame BorderColor="Black" CornerRadius="5" Padding="0">
                 <Picker x:Name="AgrotoxicoPicker" TextColor="Black" BackgroundColor="White" ItemDisplayBinding="{Binding Nome}"/>
             </Frame>
 
             <Label Text="OBSERVAÇÃO" FontAttributes="Bold" TextColor="Black"/>
-            <Frame BorderColor="Gray" CornerRadius="1" Padding="0">
+            <Frame BorderColor="Black" CornerRadius="5" Padding="0">
                 <Entry x:Name="ObservacaoEntry" TextColor="Black" BackgroundColor="White" />
             </Frame>
 
             <Label Text="DATA" FontAttributes="Bold" TextColor="Black"/>
-            <Frame x:Name="DatePickerFrame" BorderColor="Gray" CornerRadius="1" Padding="0">
+            <Frame x:Name="DatePickerFrame" BorderColor="Black" CornerRadius="5" Padding="0">
                 <DatePicker x:Name="DataPicker" TextColor="Black" BackgroundColor="White" />
             </Frame>
+            
 
             <!-- Botão Registrar -->
             <Button Text="REGISTRAR" 
