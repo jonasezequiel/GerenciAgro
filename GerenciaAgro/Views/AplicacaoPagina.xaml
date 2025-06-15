@@ -3,44 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GerenciaAgro.Views.AplicacaoPagina"
              Title="AplicacaoPagina">
-    <VerticalStackLayout Padding="10" Spacing="10">
+    <ScrollView Orientation="Horizontal">
+        <VerticalStackLayout Padding="10" Spacing="10" >
 
-        <CollectionView x:Name="ItensCollectionView" ItemsSource="{Binding Itens}">
-            <CollectionView.Header>
-                <Grid ColumnDefinitions="*,*,*,*,*" BackgroundColor="LightGray" Padding="5">
-                    <Label Text="CULTIVO" FontAttributes="Bold" />
-                    <Label Text="PRAGA" FontAttributes="Bold" Grid.Column="1" />
-                    <Label Text="AGROTÓXICO" FontAttributes="Bold" Grid.Column="2" />
-                    <Label Text="LOTE" FontAttributes="Bold" Grid.Column="3" />
-                    <Label Text="DATA" FontAttributes="Bold" Grid.Column="4" />
-                </Grid>
-            </CollectionView.Header>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid ColumnDefinitions="*,*,*,*,*" Padding="5">
-                        <Label Text="{Binding Cultivo}" />
-                        <Label Text="{Binding Praga}" Grid.Column="1" />
-                        <Label Text="{Binding Agrotoxico}" Grid.Column="2" />
-                        <Label Text="{Binding LoteAgrotoxico}" Grid.Column="3" />
-                        <Label Text="{Binding DataAplicacao, StringFormat='{0:dd/MM/yyyy HH:mm}'}" Grid.Column="4" />
+            <CollectionView x:Name="ItensCollectionView" ItemsSource="{Binding Itens}">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="120,120,150,100,150"
+          ColumnSpacing="20"
+          BackgroundColor="LightGray"
+          Padding="5">
+                        <Label Text="CULTIVO" FontAttributes="Bold" />
+                        <Label Text="PRAGA" FontAttributes="Bold" Grid.Column="1" />
+                        <Label Text="AGROTÓXICO" FontAttributes="Bold" Grid.Column="2" />
+                        <Label Text="LOTE" FontAttributes="Bold" Grid.Column="3" />
+                        <Label Text="DATA" FontAttributes="Bold" Grid.Column="4" />
                     </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="120,120,150,100,150" Padding="5">
+                            <Label Text="{Binding Cultivo}" />
+                            <Label Text="{Binding Praga}" Grid.Column="1" />
+                            <Label Text="{Binding Agrotoxico}" Grid.Column="2" />
+                            <Label Text="{Binding LoteAgrotoxico}" Grid.Column="3" />
+                            <Label Text="{Binding DataAplicacao, StringFormat='{0:dd/MM/yyyy HH:mm}'}" Grid.Column="4" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
 
-        <!-- Botão para exportar PDF -->
-        <Button Text="Exportar para PDF"
+            <!-- Botão para exportar PDF -->
+            <Button Text="Exportar para PDF"
                 BackgroundColor="Green"
                 TextColor="White"
                 CornerRadius="10"
                 HorizontalOptions="Center"
                 Clicked="OnGerarPdfClicked" />
-        <Button Text="Voltar"
+            <Button Text="Voltar"
         BackgroundColor="Green"
         TextColor="White"
         CornerRadius="10"
         HorizontalOptions="Center"
         Clicked="OnVoltarClicked" />
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

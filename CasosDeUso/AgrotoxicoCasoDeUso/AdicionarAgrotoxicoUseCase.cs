@@ -6,8 +6,8 @@ namespace CasosDeUso.AgrotoxicoCasoDeUso
 {
     public class AdicionarAgrotoxicoUseCase : IAdicionarAgrotoxicoUseCase
     {
-        private readonly IRepositorioDeAgrotoxico _agrotoxicoRepository;
-        public AdicionarAgrotoxicoUseCase(IRepositorioDeAgrotoxico agrotoxicoRepository)
+        private readonly IRepositorioDeAplicacao _agrotoxicoRepository;
+        public AdicionarAgrotoxicoUseCase(IRepositorioDeAplicacao agrotoxicoRepository)
         {
             _agrotoxicoRepository = agrotoxicoRepository ?? throw new ArgumentNullException(nameof(agrotoxicoRepository));
         }

@@ -6,8 +6,8 @@ namespace CasosDeUso.PragaCasoDeUso
 {
     public class ApagarPragaUseCase : IApagarPragaUseCase
     {
-        private readonly IRepositorioDePraga _pragaRepository;
-        public ApagarPragaUseCase(IRepositorioDePraga pragaRepository)
+        private readonly IRepositorioDeAplicacao _pragaRepository;
+        public ApagarPragaUseCase(IRepositorioDeAplicacao pragaRepository)
         {
             _pragaRepository = pragaRepository ?? throw new ArgumentNullException(nameof(pragaRepository));
         }

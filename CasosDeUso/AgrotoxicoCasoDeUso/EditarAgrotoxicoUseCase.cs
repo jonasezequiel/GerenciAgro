@@ -6,8 +6,8 @@ namespace CasosDeUso.AgrotoxicoCasoDeUso
 {
     public class EditarAgrotoxicoUseCase : IEditarAgrotoxicoUseCase
     {
-        private readonly IRepositorioDeAgrotoxico _agrotoxicoRepository;
-        public EditarAgrotoxicoUseCase(IRepositorioDeAgrotoxico repositorioDeAgrotoxico)
+        private readonly IRepositorioDeAplicacao _agrotoxicoRepository;
+        public EditarAgrotoxicoUseCase(IRepositorioDeAplicacao repositorioDeAgrotoxico)
         {
             _agrotoxicoRepository = repositorioDeAgrotoxico ?? throw new ArgumentNullException(nameof(repositorioDeAgrotoxico));
         }
@@ -24,6 +24,13 @@ namespace CasosDeUso.AgrotoxicoCasoDeUso
             agrotoxicoSelecinado.PragaAlvo = agrotoxico.PragaAlvo;
             agrotoxicoSelecinado.Nome = agrotoxico.Nome;
             agrotoxicoSelecinado.Validade = agrotoxico.Validade;
+            agrotoxicoSelecinado.Inativo = agrotoxico.Inativo;
+            agrotoxicoSelecinado.IntervaloSeguranca = agrotoxico.IntervaloSeguranca;
+            agrotoxicoSelecinado.Calda = agrotoxico.Calda;
+            agrotoxicoSelecinado.HectaresAplicacao = agrotoxico.HectaresAplicacao;
+            agrotoxicoSelecinado.QuantidadeAplicacoes = agrotoxico.QuantidadeAplicacoes;
+            agrotoxicoSelecinado.AgrotóxicoControlado = agrotoxico.AgrotóxicoControlado;
+            agrotoxicoSelecinado.Dose = agrotoxico.Dose;
             await _agrotoxicoRepository.AtualizarAgrotoxicoAsync(agrotoxicoSelecinado);
         }
     }

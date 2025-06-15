@@ -6,9 +6,9 @@ namespace CasosDeUso.CultivoCasoDeUso
 {
     public class AdicionarCultivoUseCase : IAdicionarCultivoUseCase
     {
-        private readonly IRepositorioDeCultivo _cultivoRepository;
+        private readonly IRepositorioDeAplicacao _cultivoRepository;
 
-        public AdicionarCultivoUseCase(IRepositorioDeCultivo cultivoRepository)
+        public AdicionarCultivoUseCase(IRepositorioDeAplicacao cultivoRepository)
         {
             _cultivoRepository = cultivoRepository ?? throw new ArgumentNullException(nameof(cultivoRepository));
         }

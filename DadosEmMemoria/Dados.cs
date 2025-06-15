@@ -101,6 +101,16 @@ public class Dados : IRepositorioDeAplicacao
         };
     }
 
+    public Task AdicionarAgrotoxico(Agrotoxico agrotoxico)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AdicionarAgrotoxicoAsync(Agrotoxico agrotoxico)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task AdicionarAplicacao(Aplicacao aplicacao)
     {
         _aplicacoes ??= new List<Aplicacao>();
@@ -113,6 +123,36 @@ public class Dados : IRepositorioDeAplicacao
         _aplicacoes ??= new List<Aplicacao>();
         _aplicacoes.Add(aplicacao);
         return Task.CompletedTask;
+    }
+
+    public Task AdicionarCultivo(Cultivo cultivo)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AdicionarCultivoAsync(Cultivo cultivo)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AdicionarPraga(Praga praga)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AdicionarPragaAsync(Praga praga)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AtualizarAgrotoxico(Agrotoxico agrotoxico)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AtualizarAgrotoxicoAsync(Agrotoxico agrotoxico)
+    {
+        throw new NotImplementedException();
     }
 
     public Task AtualizarAplicacao(Aplicacao aplicacao)
@@ -141,6 +181,36 @@ public class Dados : IRepositorioDeAplicacao
             aplicacaoAtualizar.Observacao = aplicacao.Observacao;
         }
         return Task.CompletedTask;
+    }
+
+    public Task AtualizarCultivo(Cultivo cultivo)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AtualizarCultivoAsync(Cultivo cultivo)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AtualizarPraga(Praga praga)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AtualizarPragaAsync(Praga praga)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Agrotoxico>> BuscarAgrotoxico(string filtro)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Agrotoxico> BuscarAgrotoxicoPorId(Guid id)
+    {
+        throw new NotImplementedException();
     }
 
     public Task<List<Aplicacao>> BuscarAplicacao(string filtro)
@@ -178,9 +248,54 @@ public class Dados : IRepositorioDeAplicacao
         return aplicacao != null ? Task.FromResult(aplicacao) : Task.FromResult<Aplicacao>(null!);
     }
 
+    public Task<List<Cultivo>> BuscarCultivo(string filtro)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Cultivo> BuscarCultivoPorId(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Praga>> BuscarPraga(string filtro)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Praga> BuscarPragaPorId(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<List<Aplicacao>> BuscarTodasAplicacao()
     {
         return Task.FromResult(_aplicacoes);
+    }
+
+    public Task<List<Praga>> BuscarTodasPragas()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Agrotoxico>> BuscarTodosAgrotoxicos()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Cultivo>> BuscarTodosCultivos()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task ExcluirAgrotoxico(Agrotoxico agrotoxico)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task ExcluirAgrotoxicoAsync(Agrotoxico agrotoxico)
+    {
+        throw new NotImplementedException();
     }
 
     public Task ExcluirAplicacao(Aplicacao aplicacao)
@@ -207,5 +322,25 @@ public class Dados : IRepositorioDeAplicacao
         {
             return Task.FromException(new ArgumentException("Aplicação não encontrada."));
         }
+    }
+
+    public Task ExcluirCultivo(Cultivo cultivo)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task ExcluirCultivoAsync(Cultivo cultivo)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task ExcluirPraga(Praga praga)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task ExcluirPragaAsync(Praga praga)
+    {
+        throw new NotImplementedException();
     }
 }

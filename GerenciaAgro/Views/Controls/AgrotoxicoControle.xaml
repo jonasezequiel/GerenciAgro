@@ -17,6 +17,31 @@
                 <Entry x:Name="NomeEntry" TextColor="Black" BackgroundColor="White" />
             </Frame>
 
+            <Label Text="DOSE" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                <Entry x:Name="DoseEntry" TextColor="Black" BackgroundColor="White" />
+            </Frame>
+
+            <Label Text="CALDA" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                <Entry x:Name="CaldaEntry" TextColor="Black" BackgroundColor="White" />
+            </Frame>
+
+            <Label Text="INTERVALO DE SEGURANÇA" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                <Entry x:Name="IntervaloSegurancaEntry" TextColor="Black" BackgroundColor="White" />
+            </Frame>
+
+            <Label Text="HECTARES PARA APLICAÇÃO" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                <Entry x:Name="HectaresAplicacaoEntry" TextColor="Black" BackgroundColor="White" />
+            </Frame>
+
+            <Label Text="QUANTIDADE APLICAÇÕES" FontAttributes="Bold" TextColor="Black"/>
+            <Frame BorderColor="Black" CornerRadius="5" Padding="0">
+                <Entry x:Name="QuantidadedAplicacaoEntry" TextColor="Black" BackgroundColor="White"/>
+            </Frame>
+
             <!-- Campo Lote -->
             <Label Text="LOTE" FontAttributes="Bold" TextColor="Black"/>
             <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
@@ -29,9 +54,19 @@
                 <DatePicker x:Name="ValidadePicker" TextColor="Black" BackgroundColor="White" />
             </Frame>
 
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                <CheckBox x:Name="InativoCheckBox" Color="Black"/>
+                <Label Text="Inativar item" VerticalOptions="Center" FontAttributes="Bold" TextColor="Black" Margin="8,0,0,0"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                <CheckBox x:Name="ControladoCheckBox" Color="Black" IsChecked="True"/>
+                <Label Text="Agrotóxico Controlado" VerticalOptions="Center" FontAttributes="Bold" TextColor="Black" Margin="8,0,0,0"/>
+            </StackLayout>
+
             <!-- Campo Praga Alvo -->
             <Label Text="PRAGAS ALVO" FontAttributes="Bold" TextColor="Black"/>
-            <Frame BorderColor="Gray" CornerRadius="5" Padding="0">
+            <Frame BorderColor="Gray" CornerRadius="5" Padding="0" BackgroundColor="White">
                 <CollectionView x:Name="PragaAlvoCheckList"
                 SelectionMode="None"
                 HeightRequest="150">

@@ -35,10 +35,21 @@ public partial class AplicacaoLista : ContentPage
         _apagarAplicacaoUseCase = apagarAplicacaoUseCase;
 
         BindingContext = this;
-        CarregarAplicacoes();
     }
 
-    private async void CarregarAplicacoes()
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await CarregarAplicacoes();
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        Aplicacoes.Clear();
+    }
+
+    private async Task CarregarAplicacoes()
     {
         Aplicacoes.Clear();
         var aplicacoes = await _aplicacaoUseCase.ExecutaListAsync("");
@@ -66,14 +77,10 @@ public partial class AplicacaoLista : ContentPage
     private async void OnEditarSelecionadoClicked(object sender, EventArgs e)
     {
         var selecionado = Aplicacoes.FirstOrDefault(a => a.IsSelected);
+
         if (selecionado != null)
         {
-            var aplicacao = await _aplicacaoUseCase.ExecutaAsync(selecionado.Id);
-            if (aplicacao != null)
-            {
-                await _editarAplicacaoUseCase.ExecutaAsync(aplicacao);
-                await Shell.Current.GoToAsync($"AplicacaoControl?aplicacaoId={aplicacao.Id}");
-            }
+            await Shell.Current.GoToAsync($"///{nameof(AplicacaoControle)}?id={selecionado.Id}");
         }
         else
         {
@@ -98,11 +105,10 @@ public partial class AplicacaoLista : ContentPage
             var aplicacao = await _aplicacaoUseCase.ExecutaAsync(dto.Id);
             if (aplicacao != null)
             {
-                // Implemente a lógica de exclusão conforme sua interface
                 await _apagarAplicacaoUseCase.ExecutaAsync(aplicacao);
             }
         }
-        CarregarAplicacoes();
+        await CarregarAplicacoes();
     }
 
     private async void OnNovaAplicacaoClicked(object sender, EventArgs e)

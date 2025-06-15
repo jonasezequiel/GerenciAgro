@@ -42,7 +42,7 @@
                             <Label Text="{Binding Pragas}" TextColor="Black" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center"/>
                             <Label Text="{Binding Agrotoxico}" TextColor="Black" Grid.Column="2" VerticalOptions="Center" HorizontalOptions="Center"/>
                             <Label Text="{Binding DataAplicacao}" TextColor="Black" Grid.Column="3" VerticalOptions="Center" HorizontalOptions="Center"/>
-                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center" Grid.Column="4" HorizontalOptions="Center"/>
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center" Grid.Column="4" HorizontalOptions="Center" Color="Black"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -71,12 +71,13 @@
                     FontAttributes="Bold"
                     HeightRequest="45"
                     Clicked="OnExcluirSelecionadoClicked"/>
-            <Button Text="Exportar para PDF"
-                BackgroundColor="Green"
-                TextColor="White"
-                CornerRadius="10"
-                HorizontalOptions="Center"
-                Clicked="OnGerarPdfClicked" />
+            
         </HorizontalStackLayout>
+        <Button Text="Exportar para PDF"
+            BackgroundColor="Green"
+            TextColor="White"
+            CornerRadius="10"
+            HorizontalOptions="Center"
+            Clicked="OnGerarPdfClicked" />
     </VerticalStackLayout>
 </ContentPage>
