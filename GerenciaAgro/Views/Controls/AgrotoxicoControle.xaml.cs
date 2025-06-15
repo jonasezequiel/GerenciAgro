@@ -62,7 +62,7 @@ public partial class AgrotoxicoControle : ContentPage, IQueryAttributable
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Erro", $"N„o foi possÌvel carregar as pragas: {ex.Message}", "OK");
+            await DisplayAlert("Erro", $"N√£o foi poss√≠vel carregar as pragas: {ex.Message}", "OK");
         }
     }
 
@@ -82,12 +82,12 @@ public partial class AgrotoxicoControle : ContentPage, IQueryAttributable
 
         if (string.IsNullOrWhiteSpace(NomeEntry.Text))
         {
-            await DisplayAlert("Erro", "O nome do agrotÛxico È obrigatÛrio.", "OK");
+            await DisplayAlert("Erro", "O nome do agrot√≥xico √© obrigat√≥rio.", "OK");
             return;
         }
         if (string.IsNullOrWhiteSpace(LoteEntry.Text))
         {
-            await DisplayAlert("Erro", "O lote È obrigatÛrio.", "OK");
+            await DisplayAlert("Erro", "O lote √© obrigat√≥rio.", "OK");
             return;
         }
 
@@ -114,7 +114,7 @@ public partial class AgrotoxicoControle : ContentPage, IQueryAttributable
             IntervaloSeguranca = intervaloSeguranca,
             QuantidadeAplicacoes = qtdAplicacao,
             HectaresAplicacao = hectaresAplicacao,
-            AgrotÛxicoControlado = controlado,
+            Agrot√≥xicoControlado = controlado,
             Calda = calda,
             Dose = dose,
         };
@@ -126,19 +126,19 @@ public partial class AgrotoxicoControle : ContentPage, IQueryAttributable
                 var agrotoxicoId = (Guid)BindingContext;
                 agrotoxico.Id = agrotoxicoId;
                 await _editarAgrotoxicoUseCase.ExecutaAsync(agrotoxico);
-                await DisplayAlert("EdiÁ„o", "AgrotÛxico editado com sucesso!", "OK");
+                await DisplayAlert("Edi√ß√£o", "Agrot√≥xico editado com sucesso!", "OK");
                 isEditing = false;
                 return;
             }
             await _adicionarAgrotoxicoUseCase.ExecutaAsync(agrotoxico);
-            await DisplayAlert("Registro", "AgrotÛxico cadastrado com sucesso!", "OK");
+            await DisplayAlert("Registro", "Agrot√≥xico cadastrado com sucesso!", "OK");
         }
         catch (Exception ex)
         {
             await DisplayAlert("Erro", $"Erro ao registrar: {ex.Message}", "OK");
         }
     }
-
+    
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query.TryGetValue("id", out var aplicacaoObj) && aplicacaoObj is string aplicacaoId)
@@ -152,7 +152,7 @@ public partial class AgrotoxicoControle : ContentPage, IQueryAttributable
             }
             catch (FormatException)
             {
-                Debug.WriteLine("ID de aplicaÁ„o inv·lido: " + aplicacaoId);
+                Debug.WriteLine("ID de aplica√ß√£o inv√°lido: " + aplicacaoId);
             }
         }
     }
@@ -176,7 +176,7 @@ public partial class AgrotoxicoControle : ContentPage, IQueryAttributable
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Erro", $"N„o foi possÌvel carregar as pragas: {ex.Message}", "OK");
+            await DisplayAlert("Erro", $"N√£o foi poss√≠vel carregar as pragas: {ex.Message}", "OK");
         }
     }
 
@@ -216,3 +216,4 @@ public class PragaWithCheckBox : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 }
+
