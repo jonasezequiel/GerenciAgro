@@ -86,6 +86,7 @@ public partial class AplicacaoControle : ContentPage, IQueryAttributable
                 aplicacao.Id = aplicacaoId;
                 await _editarAplicacaoUseCase.ExecutaAsync(aplicacao);
                 await DisplayAlert("Edição", $"Cultivo: {cultivo}\nPraga: {praga}\nAgrotóxico: {agrotoxico}\nObs: {observacao}\nData: {data}", "OK");
+                isEditing = false;
                 return;
             }
             else
@@ -117,7 +118,7 @@ public partial class AplicacaoControle : ContentPage, IQueryAttributable
         try
         {
             var cultivos = await _visualizarCultivoUseCase.ExecutaListAsync("");
-            CultivoPicker.ItemsSource = cultivos.ToList();
+            CultivoPicker.ItemsSource = cultivos.Where(c => c.Inativo == false).ToList();
         }
         catch (Exception ex)
         {
@@ -130,7 +131,7 @@ public partial class AplicacaoControle : ContentPage, IQueryAttributable
         try
         {
             var pragas = await _visualizarPragaUseCase.ExecutaListAsync("");
-            PragaPicker.ItemsSource = pragas.ToList();
+            PragaPicker.ItemsSource = pragas.Where(c => c.Inativo == false).ToList();
         }
         catch (Exception ex)
         {

@@ -439,6 +439,7 @@ namespace SqlLite
         [PrimaryKey]
         public string Id { get; set; }
         public string Nome { get; set; }
+        public int Inativo { get; set; } = 0; 
 
         public CultivoWrapper() { }
 
@@ -446,6 +447,7 @@ namespace SqlLite
         {
             Id = cultivo.Id.ToString();
             Nome = cultivo.Nome;
+            Inativo = cultivo.Inativo ? 1 : 0; // Convert boolean to int
         }
 
         public Cultivo ToCultivo()
@@ -453,7 +455,8 @@ namespace SqlLite
             return new Cultivo
             {
                 Id = Guid.TryParse(Id, out var guid) ? guid : Guid.Empty,
-                Nome = Nome
+                Nome = Nome,
+                Inativo = Inativo == 1, // Convert int back to boolean
             };
         }
     }

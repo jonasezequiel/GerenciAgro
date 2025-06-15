@@ -53,6 +53,7 @@ namespace GerenciaAgro
                 builder.Services.AddSingleton<IAdicionarCultivoUseCase, AdicionarCultivoUseCase>();
                 builder.Services.AddSingleton<IEditarAgrotoxicoUseCase, EditarAgrotoxicoUseCase>();
                 builder.Services.AddSingleton<IEditarPragaUseCase, EditarPragaUseCase>();
+                builder.Services.AddSingleton<IEditarCultivoUseCase, EditarCultivoUseCase>();
                 builder.Services.AddTransient<AplicacaoControle>();
                 #endregion
                 builder.Services.AddSingleton<AplicacaoPagina>();
@@ -64,6 +65,7 @@ namespace GerenciaAgro
                 builder.Services.AddSingleton<AgrotoxicoLista>();
                 builder.Services.AddSingleton<AplicacaoLista>();
                 builder.Services.AddSingleton<PragaLista>();
+                builder.Services.AddSingleton<CultivoLista>();
 
                 return builder.Build();
             }

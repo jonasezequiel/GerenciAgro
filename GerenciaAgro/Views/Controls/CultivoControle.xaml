@@ -15,6 +15,11 @@
                 <Entry x:Name="NomeEntry" Placeholder="Digite o nome do cultivo" TextColor="Black" BackgroundColor="White"/>
             </Frame>
 
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                <CheckBox x:Name="InativoCheckBox" Color="Black"/>
+                <Label Text="Inativar item" VerticalOptions="Center" FontAttributes="Bold" TextColor="Black" Margin="8,0,0,0"/>
+            </StackLayout>
+
             <Button Text="REGISTRAR"
                     BackgroundColor="Green"
                     TextColor="Black"
@@ -25,7 +30,7 @@
             <Grid ColumnDefinitions="*,*" HeightRequest="70" BackgroundColor="Green">
                 <ImageButton Source="anotacao.png" BackgroundColor="Transparent" 
                  Clicked="onRegistrarItemClicked"/>
-                <ImageButton Source="livro.png" Grid.Column="1" BackgroundColor="Transparent" />
+                <ImageButton Source="livro.png" Grid.Column="1" BackgroundColor="Transparent" Clicked="onListarItemClicked"/>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>

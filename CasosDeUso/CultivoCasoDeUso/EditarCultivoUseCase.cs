@@ -21,6 +21,7 @@ namespace CasosDeUso.CultivoCasoDeUso
             }
 
             cultivoSelecionado.Nome = cultivo.Nome;
+            cultivoSelecionado.Inativo = cultivo.Inativo;
             await _cultivoRepository.AtualizarCultivoAsync(cultivoSelecionado);
         }
     }
