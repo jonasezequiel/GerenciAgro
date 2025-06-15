@@ -8,14 +8,16 @@ namespace GerenciaAgro.Views.Controls
     {
         IAdicionarPragaUseCase _adicionarPragaUseCase;
         IVisualizarPragaUseCase _visualizarPragaUseCase;
+        IEditarPragaUseCase _editarPragaUseCase;
         private bool isEditing = false;
 
-        public PragaControle(IAdicionarPragaUseCase adicionarPragaUseCase, IVisualizarPragaUseCase visualizarPragaUseCase)
+        public PragaControle(IAdicionarPragaUseCase adicionarPragaUseCase, IVisualizarPragaUseCase visualizarPragaUseCase, IEditarPragaUseCase editarPragaUseCase)
         {
             InitializeComponent();
 
             _adicionarPragaUseCase = adicionarPragaUseCase;
             _visualizarPragaUseCase = visualizarPragaUseCase;
+            _editarPragaUseCase = editarPragaUseCase;
         }
 
         private async void onRegistrarItemClicked(object sender, EventArgs e)
@@ -47,7 +49,7 @@ namespace GerenciaAgro.Views.Controls
                     }
                     pragaExistente.Nome = nome;
                     pragaExistente.Inativo = status;
-                    await _adicionarPragaUseCase.ExecutaAsync(pragaExistente);
+                    await _editarPragaUseCase.ExecutaAsync(pragaExistente);
                     await DisplayAlert("Sucesso", "Praga atualizada com sucesso!", "OK");
                     isEditing = false;
                     return;

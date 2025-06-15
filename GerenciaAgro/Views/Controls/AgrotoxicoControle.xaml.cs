@@ -56,7 +56,7 @@ public partial class AgrotoxicoControle : ContentPage, IQueryAttributable
         {
             var pragas = await _visualizarPragaUseCase.ExecutaListAsync("");
             _pragasWithCheckBox = new ObservableCollection<PragaWithCheckBox>(
-                pragas.Select(p => new PragaWithCheckBox { Id = p.Id, Nome = p.Nome })
+                pragas.Where(p => p.Inativo == false).Select(p => new PragaWithCheckBox { Id = p.Id, Nome = p.Nome })
             );
             PragaAlvoCheckList.ItemsSource = _pragasWithCheckBox;
         }

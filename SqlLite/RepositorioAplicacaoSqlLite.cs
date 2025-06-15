@@ -436,6 +436,7 @@ namespace SqlLite
 
     public class CultivoWrapper
     {
+        [PrimaryKey]
         public string Id { get; set; }
         public string Nome { get; set; }
 
@@ -459,6 +460,7 @@ namespace SqlLite
 
     public class PragaWrapper
     {
+        [PrimaryKey]
         public string Id { get; set; }
         public string Nome { get; set; }
         public int Inativo { get; set; } = 0;

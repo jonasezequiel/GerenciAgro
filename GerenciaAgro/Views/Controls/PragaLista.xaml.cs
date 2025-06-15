@@ -14,10 +14,21 @@ namespace GerenciaAgro.Views.Controls
             _visualizarPragaUseCase = visualizarPragaUseCase;
             Pragas = new ObservableCollection<PragaDto>();
             BindingContext = this;
-            CarregarPragas();
         }
 
-        private async void CarregarPragas()
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await CarregarPragas();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            Pragas.Clear();
+        }
+
+        private async Task CarregarPragas()
         {
             var pragaList = await _visualizarPragaUseCase.ExecutaListAsync("");
             Pragas.Clear();
