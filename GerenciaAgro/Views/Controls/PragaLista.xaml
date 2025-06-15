@@ -1,0 +1,74 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GerenciaAgro.Views.Controls.PragaLista"
+             Title="Lista de Pragas"
+             BackgroundColor="White">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Image Source="logo.jpeg" HorizontalOptions="Center" HeightRequest="80"/>
+        <Label Text="PRAGAS CADASTRADAS"
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="Green"
+               HorizontalOptions="Center"
+               Margin="0,0,0,10"/>
+
+        <Button Text="Nova Praga"
+                BackgroundColor="Green"
+                TextColor="White"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                HeightRequest="45"
+                Clicked="OnNovaPragaClicked"
+                Margin="0,0,0,10"/>
+
+        <Frame BorderColor="#CCCCCC" CornerRadius="10" Padding="0" HasShadow="True">
+            <CollectionView x:Name="PragaCollectionView"
+                            ItemsSource="{Binding Pragas}"
+                            SelectionMode="Multiple"
+                            SelectionChanged="PragaCollectionView_SelectionChanged">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="2*,2*" Padding="10" BackgroundColor="#F0F0F0">
+                        <Label Text="Nome" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="Status" FontAttributes="Bold" TextColor="Black" Grid.Column="1"/>
+                    </Grid>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="2*,2*" Padding="10" RowSpacing="0" BackgroundColor="#F0F0F0">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal"/>
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#C8E6C9"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Label Text="{Binding Nome}" TextColor="Black" VerticalOptions="Center"/>
+                            <Label Text="{Binding Status, Converter={StaticResource StatusToStringConverter}}" 
+                                   TextColor="Black" Grid.Column="1" VerticalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="Nenhuma praga cadastrada."
+                           TextColor="Gray"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Padding="20"/>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </Frame>
+        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+            <Button Text="Editar Selecionado"
+                    BackgroundColor="#2196F3"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    HeightRequest="45"
+                    Clicked="OnEditarSelecionadoClicked"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

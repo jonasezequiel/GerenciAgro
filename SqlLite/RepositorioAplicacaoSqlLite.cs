@@ -461,6 +461,7 @@ namespace SqlLite
     {
         public string Id { get; set; }
         public string Nome { get; set; }
+        public int Inativo { get; set; } = 0;
 
         public PragaWrapper() { }
 
@@ -468,6 +469,7 @@ namespace SqlLite
         {
             Id = praga.Id.ToString();
             Nome = praga.Nome;
+            Inativo = praga.Inativo ? 1 : 0;
         }
 
         public Praga ToPraga()
@@ -476,6 +478,7 @@ namespace SqlLite
             {
                 Id = Guid.TryParse(Id, out var guid) ? guid : Guid.Empty,
                 Nome = Nome,
+                Inativo = Inativo == 1
             };
         }
     }

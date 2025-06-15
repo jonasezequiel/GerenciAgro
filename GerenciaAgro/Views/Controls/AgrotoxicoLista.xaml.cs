@@ -11,8 +11,6 @@ namespace GerenciaAgro.Views.Controls
     {
         public ObservableCollection<AgrotoxicDto> Agrotoxicos { get; set; }
         IVisualizarAgrotoxicoUseCase _visualizarAgrotoxicoUseCase;
-        IVisualizarPragaUseCase _visualizarPragaUseCase;
-        IEditarAgrotoxicoUseCase _editarAgrotoxicoUseCase;
 
         public AgrotoxicoLista(IVisualizarAgrotoxicoUseCase visualizarAgrotoxicoUseCase,
                                IVisualizarPragaUseCase visualizarPragaUseCase,
@@ -21,8 +19,6 @@ namespace GerenciaAgro.Views.Controls
             InitializeComponent();
 
             _visualizarAgrotoxicoUseCase = visualizarAgrotoxicoUseCase;
-            _visualizarPragaUseCase = visualizarPragaUseCase;
-            _editarAgrotoxicoUseCase = editarAgrotoxicoUseCase;
 
             Agrotoxicos = new ObservableCollection<AgrotoxicDto>();
             BindingContext = this;
@@ -67,11 +63,9 @@ namespace GerenciaAgro.Views.Controls
 
         private void AgrotoxicoCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Limpa seleção anterior
             foreach (var item in Agrotoxicos)
                 item.IsSelected = false;
 
-            // Marca os itens atualmente selecionados
             foreach (var selecionado in e.CurrentSelection)
             {
                 if (selecionado is AgrotoxicDto dto)

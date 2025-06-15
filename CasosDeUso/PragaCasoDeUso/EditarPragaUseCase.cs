@@ -20,6 +20,7 @@ namespace CasosDeUso.PragaCasoDeUso
                 return;
             }
             pragaSelecionada.Nome = praga.Nome;
+            pragaSelecionada.Inativo = praga.Inativo;
             await _pragaRepository.AtualizarPragaAsync(pragaSelecionada);
         }
     }
