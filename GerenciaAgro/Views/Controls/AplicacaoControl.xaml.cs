@@ -58,9 +58,9 @@ public partial class AplicacaoControle : ContentPage, IQueryAttributable
 
     private async void OnRegistrarClicked(object sender, EventArgs e)
     {
-        var cultivo = (CultivoPicker.SelectedItem as Cultivo)?.Id;
-        var praga = (PragaPicker.SelectedItem as Praga)?.Id;
-        var agrotoxico = (AgrotoxicoPicker.SelectedItem as Agrotoxico)?.Id;
+        var cultivo = (CultivoPicker.SelectedItem as Cultivo);
+        var praga = (PragaPicker.SelectedItem as Praga);
+        var agrotoxico = (AgrotoxicoPicker.SelectedItem as Agrotoxico);
         var observacao = ObservacaoEntry.Text;
         var data = DataPicker.Date;
 
@@ -73,9 +73,9 @@ public partial class AplicacaoControle : ContentPage, IQueryAttributable
 
             var aplicacao = new Aplicacao
             {
-                AgrotoxicoId = agrotoxico ?? throw new Exception("Agrotoxico não selecionado"),
-                CultivoId = cultivo ?? throw new Exception("Cultivo não selecionado"),
-                PragasAlvos = new List<Guid> { praga.Value },
+                AgrotoxicoId = agrotoxico?.Id ?? throw new Exception("Agrotoxico não selecionado"),
+                CultivoId = cultivo?.Id ?? throw new Exception("Cultivo não selecionado"),
+                PragasAlvos = new List<Guid> { praga.Id },
                 Observacao = observacao,
                 DataAplicacao = data
             };
@@ -85,7 +85,7 @@ public partial class AplicacaoControle : ContentPage, IQueryAttributable
                 var aplicacaoId = (Guid)BindingContext;
                 aplicacao.Id = aplicacaoId;
                 await _editarAplicacaoUseCase.ExecutaAsync(aplicacao);
-                await DisplayAlert("Edição", $"Cultivo: {cultivo}\nPraga: {praga}\nAgrotóxico: {agrotoxico}\nObs: {observacao}\nData: {data}", "OK");
+                await DisplayAlert("Aplicação Editada com Sucesso!", $"Cultivo: {cultivo.Nome}\nPraga: {praga.Nome}\nAgrotóxico: {agrotoxico.Nome}\nObs: {observacao}\nData: {data}", "OK");
                 isEditing = false;
                 return;
             }
@@ -95,7 +95,7 @@ public partial class AplicacaoControle : ContentPage, IQueryAttributable
             }
             await _adicionarAplicacaoUseCase.ExecutaAsync(aplicacao);
 
-            await DisplayAlert("Registro", $"Cultivo: {cultivo}\nPraga: {praga}\nAgrotóxico: {agrotoxico}\nObs: {observacao}\nData: {data}", "OK");
+            await DisplayAlert("Aplicacao Registrada com Sucesso!", $"Cultivo: {cultivo.Nome}\nPraga: {praga.Nome}\nAgrotóxico: {agrotoxico.Nome}\nObs: {observacao}\nData: {data}", "OK");
         } catch (Exception ex)
         {
             await DisplayAlert("Erro", ex.Message, "OK");
