@@ -47,8 +47,7 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <Label Text="{Binding Nome}" TextColor="Black" VerticalOptions="Center"/>
-                            <Label Text="{Binding Status, Converter={StaticResource StatusToStringConverter}}" 
-                                   TextColor="Black" Grid.Column="1" VerticalOptions="Center"/>
+                            <Label Text="{Binding Status }" TextColor="Black" Grid.Column="1" VerticalOptions="Center"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
